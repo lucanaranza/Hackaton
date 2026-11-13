@@ -1,0 +1,18 @@
+# File delle effemeridi (pesanti, si riscaricano da soli)
+*.bsp
+*.bpc
+*.tf
+*.tpc
+
+# Impostazioni personali dell'editor
+.vscode/
+
+# File temporanei di Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# File di sistema
+.DS_Store
+Thumbs.db
