@@ -53,23 +53,22 @@ def _risorse():
 def _maschera(orizzonte, azimut):
     """Elevazione dell'orizzonte (gradi) nelle direzioni 'azimut'."""
     if orizzonte is None:
-        return np.zeros_like(azimut)                           
-    oriz = np.asarray(orizzonte, dtype=float)                 
-    gradi = np.linspace(0, 360, len(oriz), endpoint=False)
-    return np.interp(azimut, gradi, oriz, period=360)
+        return np.zeros_like(azimut)                          # If there is no horizon data, assume a flat horizon at 0 degrees elevation           
+    oriz = np.asarray(orizzonte, dtype=float)                 # oriz is an array of 360 elevation values (one for each azimuth degree)      
+    gradi = np.linspace(0, 360, len(oriz), endpoint=False)    # Create an array of azimuth values corresponding to the elevation values in 'oriz'
+    return np.interp(azimut, gradi, oriz, period=360)         
 
 
 def _trova_eventi(tempi, margine, nome_sorge, nome_tramonta):
     """Trova gli istanti in cui 'margine' (elevazione - orizzonte) cambia segno.
-
     Usa un'interpolazione lineare tra due campioni consecutivi: con un passo
     di 10 minuti l'errore e' di pochi minuti, ampiamente sufficiente.
     """
     eventi = []
-    for i in range(len(margine) - 1):
+    for i in range(len(margine) - 1):                      # Loop through the 'margine' array to find sign changes between consecutive samples
         a, b = margine[i], margine[i + 1]
         if (a <= 0 < b) or (a > 0 >= b):
-            frazione = a / (a - b)
+            frazione = a / (a - b)                         # interpolate to find the fraction of the interval where the sign change occurs
             t = tempi[i] + (tempi[i + 1] - tempi[i]) * frazione
             tipo = nome_sorge if b > a else nome_tramonta
             eventi.append({"tipo": tipo, "tempo": t})
@@ -77,6 +76,7 @@ def _trova_eventi(tempi, margine, nome_sorge, nome_tramonta):
 
 
 def _ore(maschera_bool, passo_min):
+# Compute the total number of hours where the boolean mask is True, given the time step in minutes                      
     return float(np.sum(maschera_bool) * passo_min / 60)
 
 
@@ -91,12 +91,12 @@ def _durata_testo(td):
 
 
 def _iso(t):
-    return t.strftime('%Y-%m-%dT%H:%M:%SZ')
+    """datetime -> ISO 8601 (UTC) string."""
+    return t.strftime('%Y-%m-%dT%H:%M:%SZ')               # For JAVA!!!
 
 
 def calcola_posizioni(lat, lon, inizio, giorni=30, passo_min=10):
     """Elevazione e azimut di Sole e Terra visti dal sito, nel tempo.
-
     inizio: datetime (UTC). Restituisce (tempi, sole_alt, sole_az, terra_alt, terra_az).
     """
     r = _risorse()
@@ -105,23 +105,23 @@ def calcola_posizioni(lat, lon, inizio, giorni=30, passo_min=10):
     if inizio.tzinfo is None:
         inizio = inizio.replace(tzinfo=timezone.utc)
     n = int(giorni * 24 * 60 / passo_min) + 1
-    tempi = [inizio + timedelta(minutes=passo_min * k) for k in range(n)]
-    t = ts.from_datetimes(tempi)
+    tempi = [inizio + timedelta(minutes=passo_min * k) for k in range(n)]   # Create a list of datetime objects representing the time steps for the analysis
+    t = ts.from_datetimes(tempi)               # Convert the list of datetime objects to Skyfield Time objects for ephemeris calculations (vectorial form)
 
-    sito = eph['moon'] + pc.build_latlon_degrees(frame, lat, lon)
-    osservatore = sito.at(t)
+    sito = eph['moon'] + pc.build_latlon_degrees(frame, lat, lon)     # Create a Skyfield position object for the lunar site using the Moon's ephemeris and the provided latitude and longitude
+    osservatore = sito.at(t)                                          # Create a Skyfield observer object at the lunar site for the specified times
 
     risultati = []
-    for corpo in (eph['sun'], eph['earth']):
-        alt, az, _ = osservatore.observe(corpo).apparent().altaz()
-        risultati += [alt.degrees, az.degrees]
+    for corpo in (eph['sun'], eph['earth']):                          # Loop through the Sun and Earth to calculate their apparent positions as seen from the lunar site
+        alt, az, _ = osservatore.observe(corpo).apparent().altaz()    # Compute the apparent altitude and azimuth of the celestial body as seen from the lunar site
+        risultati += [alt.degrees, az.degrees]                        # Append the altitude and azimuth values (in degrees) to the results list for both the Sun and Earth
 
-    return (tempi, *risultati)
+    return (tempi, *risultati)  # Contain tempi, sole_alt, sole_az, terra_alt, terra_az (*risultati unpacks the list into individual variables for return)
 
 
 def valuta_sito(lat, lon, inizio, giorni=30, passo_min=10, orizzonte=None):
     """Valuta un sito lunare su un intervallo di tempo.
-
+    
     Parametri
     ---------
     lat, lon   : coordinate del sito in gradi (lon positiva a est)
