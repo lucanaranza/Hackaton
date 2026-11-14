@@ -4,6 +4,11 @@
 *.tf
 *.tpc
 
+# DEM e mappe raster: condivisi separatamente, come da contratto topografia
+*.tif
+*.tiff
+3-Topography/output/*.png
+
 # Impostazioni personali dell'editor
 .vscode/
 
