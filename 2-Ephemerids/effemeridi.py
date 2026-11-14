@@ -42,10 +42,10 @@ def _risorse():
         ts = _load.timescale()
         eph = _load('de421.bsp')
         pc = PlanetaryConstants()
-        pc.read_text(_load('moon_080317.tf'))
-        pc.read_text(_load('pck00008.tpc'))
-        pc.read_binary(_load('moon_pa_de421_1900-2050.bpc'))
-        frame = pc.build_frame_named('MOON_ME_DE421')
+        pc.read_text(_load('moon_080317.tf'))                 # Lunear reference frame
+        pc.read_text(_load('pck00008.tpc'))                   # Planetary Constants Kernel (PCK) con orientamento della Luna
+        pc.read_binary(_load('moon_pa_de421_1900-2050.bpc'))  # Lunar orientation data (PA = principal axes) per il periodo 1900-2050
+        frame = pc.build_frame_named('MOON_ME_DE421')         # Build the lunar reference frame using the DE421 ephemeris - coerent with LOLA data
         _cache.update(ts=ts, eph=eph, pc=pc, frame=frame)
     return _cache
 
@@ -53,8 +53,8 @@ def _risorse():
 def _maschera(orizzonte, azimut):
     """Elevazione dell'orizzonte (gradi) nelle direzioni 'azimut'."""
     if orizzonte is None:
-        return np.zeros_like(azimut)
-    oriz = np.asarray(orizzonte, dtype=float)
+        return np.zeros_like(azimut)                           
+    oriz = np.asarray(orizzonte, dtype=float)                 
     gradi = np.linspace(0, 360, len(oriz), endpoint=False)
     return np.interp(azimut, gradi, oriz, period=360)
 
