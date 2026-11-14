@@ -1,4 +1,4 @@
-# 2-Ephemerids — Sole e Terra visti da un sito lunare
+# 1-Ephemerids — Sole e Terra visti da un sito lunare
 
 Relative position for Earth and Sun, plus power / communication / dust metrics.
 
@@ -15,12 +15,12 @@ Relative position for Earth and Sun, plus power / communication / dust metrics.
 ## Uso rapido
 
 ```python
-import sys; sys.path.insert(0, "2-Ephemerids")
+import sys; sys.path.insert(0, "1-Ephemerids")
 from effemeridi import valuta_sito
 from datetime import datetime
 
 r = valuta_sito(-89.46, -137.49, datetime(2026, 11, 14),
-                orizzonte=lista_360_valori,          # da 3-Topography (None = Luna liscia)
+                orizzonte=lista_360_valori,          # da 2-Topography (None = Luna liscia)
                 margine_com_deg=0.5,                 # Terra utile se >= 0.5 gradi sopra il terreno
                 perdita_iniziale_polvere_pct=0.0,    # scenario polvere dell'atterraggio
                 degrado_polvere_annuo_pct=1.3)       # dati Apollo Dust Detector
@@ -30,8 +30,8 @@ print(r["metriche"])
 Da terminale, nella cartella principale del repo:
 
 ```
-python 2-Ephemerids/test_luna.py
-python 2-Ephemerids/effemeridi.py
+python 1-Ephemerids/test_luna.py
+python 1-Ephemerids/effemeridi.py
 ```
 
 ## Convenzioni
