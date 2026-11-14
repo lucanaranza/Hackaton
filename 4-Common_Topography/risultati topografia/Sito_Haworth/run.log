@@ -1,5 +1,5 @@
+LDSM -> LDEM: C:\Users\cater\OneDrive\Desktop\universit�\EXTRA\Hackaton NASA\Hackaton_Topography\dati_regionali\LDSM_60S_240MPP_ADJ.tiff -> C:\Users\cater\OneDrive\Desktop\universit�\EXTRA\Hackaton NASA\Hackaton_Topography\dati_regionali\60S\LDEM_60S_240MPP_ADJ.TIF
 Orizzonte: 360 valori, da -0.040 a 5.932 gradi
-ATTENZIONE: DEM lontano assente: rilievi oltre il DEM locale non valutati.
 {
   "shape": [
     5960,

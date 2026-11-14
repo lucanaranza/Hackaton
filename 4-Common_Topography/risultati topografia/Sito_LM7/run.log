@@ -1,6 +1,5 @@
-Orizzonte: 360 valori, da -3.703 a 5.428 gradi
-ATTENZIONE: DEM lontano assente: rilievi oltre il DEM locale non valutati.
-ATTENZIONE: Copertura incompleta: campioni fuori raster o NoData; orizzonte potenzialmente sottostimato.
+LDSM -> LDEM: C:\Users\cater\OneDrive\Desktop\universit�\EXTRA\Hackaton NASA\Hackaton_Topography\dati_regionali\LDSM_60S_240MPP_ADJ.tiff -> C:\Users\cater\OneDrive\Desktop\universit�\EXTRA\Hackaton NASA\Hackaton_Topography\dati_regionali\60S\LDEM_60S_240MPP_ADJ.TIF
+Orizzonte: 360 valori, da -1.588 a 5.428 gradi
 {
   "shape": [
     4000,

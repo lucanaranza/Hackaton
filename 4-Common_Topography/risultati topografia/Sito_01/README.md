@@ -10,13 +10,14 @@ Analisi del centro del DEM; osservatore a 2 m.
 | Area con pendenza <=10 gradi | 93.12 km2 (36.42%) |
 | Incertezza verticale media fornita | 0.405 m |
 | Pixel con LDEC zero | 90.51% |
-| Orizzonte minimo / massimo | -4.619 / 2.218 gradi |
+| Orizzonte minimo / massimo | -3.208 / 2.218 gradi |
 | Celle | 25600 |
 | Verifica | PASS |
 
 ## Risultati
 
-- [Orizzonte a 360 valori](horizon.json)
+- [Orizzonte regionale a 360 valori](horizon.json)
+- [Orizzonte solo locale](horizon_local.json)
 - [Mappa e profilo](horizon.png)
 - [Statistiche complete](summary.json)
 - [Celle topografiche](site_cells.csv)
@@ -32,5 +33,8 @@ LDEC zero non e NoData: il DEM contiene anche terreno interpolato.
 Il filtro di pendenza non certifica un sito sicuro e non impone aree connesse.
 Non sono stati calcolati luce, visibilita terrestre, temperatura o presenza di ghiaccio.
 Output compatti: nessun GeoTIFF derivato, per contenere lo spazio su disco.
-- DEM lontano assente: rilievi oltre il DEM locale non valutati.
-- Copertura incompleta: campioni fuori raster o NoData; orizzonte potenzialmente sottostimato.
+Terreno lontano incluso fino a 200 km: 360/360 direzioni con tutti i campioni disponibili.
+Ostruzione aumentata in 81 direzioni; aumento massimo 2.4591 gradi.
+Il LDSM identifica il prodotto LDEM: le quote regionali provengono dal LDEM 60S a 240 m/pixel.
+Il passo di campionamento regionale di 100 m non aumenta la risoluzione del DEM.
+La copertura completa riguarda i campioni; rimangono i limiti del dettaglio e del raggio scelto.

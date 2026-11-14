@@ -91,7 +91,7 @@
     "Quattro raster leggibili; griglie e parametri CRS numericamente identici",
     "Pendenze in [0,90], incertezze e LDEC non negativi; eventuali frazioni LDEC segnalate",
     "360 angoli finiti e coordinate coerenti",
-    "Otto azimut confermati da bilineare indipendente",
+    "Otto azimut fino al raggio regionale confermati da bilineare indipendente",
     "Conteggio delle celle CSV verificato"
   ],
   "slope_comparison": {
@@ -101,5 +101,14 @@
     "max_absolute_difference_deg": 0.003531769196790435
   },
   "independent_horizon_max_difference_deg": 5.46229728115577e-13,
-  "cell_count": 44100
+  "cell_count": 44100,
+  "regional_coverage": {
+    "dem": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton_Topography\\dati_regionali\\60S\\LDEM_60S_240MPP_ADJ.TIF",
+    "distance_m": 200000,
+    "complete": true,
+    "sample_counts": {
+      "vicino": 720000,
+      "lontano": 684000
+    }
+  }
 }
