@@ -1,0 +1,2908 @@
+{
+  "nome": "Sito_Shoemaker",
+  "lat": -87.18351447607763,
+  "lon": 62.83501494266807,
+  "orizzonte": [
+    -1.505156270438024,
+    -1.3802599053538478,
+    -1.3086329139108672,
+    -1.2961557441394642,
+    -1.3516284468136786,
+    -1.461475417359084,
+    -1.5840855091549222,
+    -1.7326662568490878,
+    -1.8779579490722405,
+    -2.0072876354233564,
+    -2.0611956120291173,
+    -2.0887656846167033,
+    -2.153864978810043,
+    -2.179953688347106,
+    -2.2327488915810756,
+    -2.2455385501331793,
+    -2.2852972764390205,
+    -2.197107506913465,
+    -2.101327232581648,
+    -1.9436708576566077,
+    -1.8168678006237549,
+    -1.728081129212333,
+    -1.6262653514144811,
+    -1.5604304121429777,
+    -1.5915457632223888,
+    -1.5942723797849343,
+    -1.5953895494712926,
+    -1.6265889522179158,
+    -1.656554822973636,
+    -1.6643862566871404,
+    -1.5790313801003693,
+    -1.5890796810491212,
+    -1.5422145120897377,
+    -1.493422290094142,
+    -1.4511040469404446,
+    -1.4162968059857017,
+    -1.3889151103288542,
+    -1.3345474043315657,
+    -1.320397785005526,
+    -1.3250858962912435,
+    -1.3039173472928103,
+    -1.293780137011357,
+    -1.300094358569601,
+    -1.3083026795236476,
+    -1.2834847782156507,
+    -1.1677801774456655,
+    -1.0791251343001962,
+    -0.9886780480842746,
+    -0.8396460251780338,
+    -0.649281107055548,
+    -0.49903952151049413,
+    -0.3022094759334622,
+    -0.1445858045276585,
+    0.040077409276175445,
+    0.15993550605261286,
+    0.272251521665538,
+    0.3703679110814973,
+    0.48491446965458485,
+    0.5530387993052498,
+    0.6580823944739803,
+    0.7691271248238987,
+    0.8144210652587031,
+    0.8755663633243677,
+    0.8852366920058994,
+    0.9222952612041247,
+    0.9262095878234688,
+    0.9289261448147407,
+    0.9223592458074915,
+    0.8791675340312065,
+    0.8312676456334175,
+    0.7742005355531492,
+    0.7445981009505214,
+    0.7270092125114984,
+    0.6705067975723796,
+    0.5991844999254616,
+    0.5423024579537505,
+    0.4789685867870509,
+    0.39157907768564854,
+    0.30186898273356805,
+    0.2350094782575299,
+    0.174433127621352,
+    0.08817751575470202,
+    0.008072490348092105,
+    -0.06643359670820244,
+    -0.17947502961187697,
+    -0.294057022701427,
+    -0.37287343191807293,
+    -0.3849597458660191,
+    -0.345774477397703,
+    -0.35631948683404197,
+    -0.33732783741665395,
+    -0.34299453818217585,
+    -0.31803156409303035,
+    -0.3233783484314335,
+    -0.3404002235632967,
+    -0.34246475662980647,
+    -0.2840736452423414,
+    -0.25819730107849,
+    -0.22289108575564645,
+    -0.17959942518650213,
+    -0.1584927948547961,
+    -0.1414890504517951,
+    -0.12119342323028127,
+    -0.09218777048141577,
+    -0.036066069440169844,
+    0.046201867598030064,
+    0.1263850675093927,
+    0.19301160080594354,
+    0.26698612321121773,
+    0.34573575818615837,
+    0.42990382731953347,
+    0.518806156523529,
+    0.631209752753064,
+    0.7655834988106869,
+    0.899033343649015,
+    1.0317635824578781,
+    1.1247979899318707,
+    1.181782660868912,
+    1.2388896238538327,
+    1.2956421391766983,
+    1.4005004514869681,
+    1.5031168546072204,
+    1.550447917538676,
+    1.5524272527084262,
+    1.5644015069024098,
+    1.6173019135557138,
+    1.6676985057577294,
+    1.713954592589912,
+    1.760879909723644,
+    1.8027825923840355,
+    1.8796782358325,
+    1.9323098399274732,
+    1.9350550574584742,
+    1.9265052595171162,
+    1.919042715080279,
+    1.9144214676252114,
+    1.911317852569837,
+    1.9097090633364755,
+    1.9097403410360931,
+    1.9134287281242315,
+    1.9289588729784377,
+    1.9564628963750113,
+    1.9940543258508914,
+    2.039126355648703,
+    2.081589348319659,
+    2.1323183655806157,
+    2.1812138708354425,
+    2.2482256387600885,
+    2.274559503786757,
+    2.285239997972199,
+    2.280551567201682,
+    2.272230482421603,
+    2.2836986250717137,
+    2.2977405991058975,
+    2.317084401483128,
+    2.336344332082096,
+    2.3454588541092978,
+    2.3487176159785643,
+    2.367093668795679,
+    2.4254102614597093,
+    2.463865387832784,
+    2.500925210502991,
+    2.5498983611872883,
+    2.600452222964931,
+    2.648145495042722,
+    2.645950634230592,
+    2.65027955111396,
+    2.6498778686687845,
+    2.6560031461898177,
+    2.679498374030444,
+    2.7083392026886024,
+    2.744685043964017,
+    2.7821668263753803,
+    2.8538550673699206,
+    2.939548437873562,
+    2.9335458915988215,
+    2.948656691997182,
+    3.002065927358994,
+    3.027576876335678,
+    3.0244704345256643,
+    3.048417797674303,
+    3.0503646329804206,
+    3.059437262535126,
+    3.070674582980275,
+    3.0854929963328006,
+    3.1020234542430574,
+    3.1204902118962634,
+    3.1392509360961967,
+    3.159758048596937,
+    3.181828085919107,
+    3.2090489229094854,
+    3.245265134126086,
+    3.2737571696454872,
+    3.2363299914422066,
+    3.2070260074851302,
+    3.182530646484389,
+    3.166264130225737,
+    3.164492586929626,
+    3.1699592538798878,
+    3.171499335776879,
+    3.0971477501008327,
+    3.0766302841157533,
+    3.0255538506050166,
+    2.940133942371932,
+    2.894187593482691,
+    2.8561946813468033,
+    2.773320809893734,
+    2.6912010848135,
+    2.623693428652305,
+    2.5990820462970645,
+    2.4945983146082065,
+    2.395677055404474,
+    2.2876817117307717,
+    2.1840193053293553,
+    2.0957157069829853,
+    2.01353939835507,
+    2.0115578738670217,
+    1.9772688268949414,
+    1.9694710516107239,
+    1.951103569950167,
+    1.9434877941555682,
+    1.9462683078026692,
+    1.9443887525251542,
+    1.9450136618947584,
+    1.9600114582380639,
+    1.9989036967519103,
+    2.0356848721725833,
+    2.071142896234107,
+    2.1120967135347675,
+    2.137222270616707,
+    2.177171453177056,
+    2.2194255669153904,
+    2.2826958953529153,
+    2.362737124696472,
+    2.4642187025929063,
+    2.598051039384859,
+    2.731987781705031,
+    2.8653771224796287,
+    2.978654433579303,
+    3.072904291027946,
+    3.1719645207905485,
+    3.2857162178328903,
+    3.40340293634997,
+    3.510053157741275,
+    3.5829187407515213,
+    3.6730855577739705,
+    3.7973694725792804,
+    3.8785776180649343,
+    3.9500803653332475,
+    4.061704789820348,
+    4.157389277848592,
+    4.249823487988911,
+    4.300123203567496,
+    4.314861164944563,
+    4.280535218449683,
+    4.2696329299036435,
+    4.271120447364822,
+    4.253141796132944,
+    4.248959306214216,
+    4.271584163348639,
+    4.260967056724631,
+    4.2849537795523,
+    4.268943082764265,
+    4.268762974227145,
+    4.268222275665897,
+    4.239189548637142,
+    4.192036012856483,
+    4.144863620655757,
+    4.119508022105462,
+    4.079493213441745,
+    4.041686389985292,
+    4.0283810263046576,
+    4.030529510461138,
+    3.9676686691049587,
+    3.9223608147522455,
+    3.8993517829237874,
+    3.8291235848174283,
+    3.7566491151438823,
+    3.6816266252223606,
+    3.6019007843675235,
+    3.5655440037751247,
+    3.5607512835693234,
+    3.5254636996752695,
+    3.479664822373812,
+    3.4266195799933654,
+    3.36498533884337,
+    3.3167070866524373,
+    3.266355910371508,
+    3.170926580454409,
+    3.07690441168843,
+    2.9799239998156763,
+    2.850565126091238,
+    2.7270038283893374,
+    2.6176573370679304,
+    2.5313660776626543,
+    2.44335465441648,
+    2.3647419577742217,
+    2.3057333720115953,
+    2.221008079575198,
+    2.1311880821017226,
+    2.038449594190485,
+    1.9445867183855567,
+    1.8501543847392612,
+    1.773281283643255,
+    1.7041048145976747,
+    1.582034127199067,
+    1.4816883221273462,
+    1.396028959440632,
+    1.346713253637055,
+    1.2357929329132127,
+    1.1261968401083058,
+    1.0680760475004347,
+    1.082301982767647,
+    1.079485828742402,
+    1.0822731004724633,
+    1.0630567013720578,
+    0.99894703690318,
+    0.9023241340921834,
+    0.836003537291064,
+    0.7464834964454117,
+    0.6358440043596368,
+    0.5546317094489042,
+    0.4708603023502872,
+    0.38742570625755557,
+    0.2937795725321443,
+    0.17287859596881963,
+    0.07536780165919094,
+    -0.05724174037678555,
+    -0.21401080694289276,
+    -0.35989457794524243,
+    -0.48921850001477896,
+    -0.6064780090886949,
+    -0.7191187174249591,
+    -0.8447363579931902,
+    -0.9611272750680274,
+    -1.0599909893499089,
+    -1.2137931278340084,
+    -1.2881195086858372,
+    -1.375952006202053,
+    -1.4565217287627301,
+    -1.5277732639067931,
+    -1.5632448045080345,
+    -1.5892833472775445,
+    -1.6224979138704663,
+    -1.653745956128996,
+    -1.6943289544268925,
+    -1.733366738118329,
+    -1.7729982619792877,
+    -1.742458043702074,
+    -1.738597683095083,
+    -1.7611013346585018,
+    -1.782000791040507,
+    -1.8012130975137086,
+    -1.7924689027491163,
+    -1.7098795713438326,
+    -1.681715715090391,
+    -1.7341306234714542,
+    -1.894962772133063,
+    -1.945997744629021,
+    -1.7039512247088975
+  ],
+  "metadati": {
+    "quota_sito_m": 548.128250122021,
+    "altezza_osservatore_m": 2.0,
+    "raggio_lunare_m": 1737400.0,
+    "frame": "MOON_ME_DE421 (da verificare per DEM esterni)",
+    "azimut": "0=Nord geografico, 90=Est, 180=Sud, 270=Ovest",
+    "dem_vicino": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton_Topography\\dati_siti_topografia\\Sito_Shoemaker\\Shoemaker_final_adj_5mpp_surf.tif",
+    "dem_lontano": null,
+    "passo_vicino_m": 5.0,
+    "passo_lontano_m": 100.0,
+    "distanza_vicina_m": 10000.0,
+    "distanza_massima_richiesta_m": 200000.0,
+    "distanza_massima_campionata_m": 10000.0,
+    "copertura_completa_entro_distanza_richiesta": false,
+    "copertura_per_azimut": [
+      {
+        "azimut": 0,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 1,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 2,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 3,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 4,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 5,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 6,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 7,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 8,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 9,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 10,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 11,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 12,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 13,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 14,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 15,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 16,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 17,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 18,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 19,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 20,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 21,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 22,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 23,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 24,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 25,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 26,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 27,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 28,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 29,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 30,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 31,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 32,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 33,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 34,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 35,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 36,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 37,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 38,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 39,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 40,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 41,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 42,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 43,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 44,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 45,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 46,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 47,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 48,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 49,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 50,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 51,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 52,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 53,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 54,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 55,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 56,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 57,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 58,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 59,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 60,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 61,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 62,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 63,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 64,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 65,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 66,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 67,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 68,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 69,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 70,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 71,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 72,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 73,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 74,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 75,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 76,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 77,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 78,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 79,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 80,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 81,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 82,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 83,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 84,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 85,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 86,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 87,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 88,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 89,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 90,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 91,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 92,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 93,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 94,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 95,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 96,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 97,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 98,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 99,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 100,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 101,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 102,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 103,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 104,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 105,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 106,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 107,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 108,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 109,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 110,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 111,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 112,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 113,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 114,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 115,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 116,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 117,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 118,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 119,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 120,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 121,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 122,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 123,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 124,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 125,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 126,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 127,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 128,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 129,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 130,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 131,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 132,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 133,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 134,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 135,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 136,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 137,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 138,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 139,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 140,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 141,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 142,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 143,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 144,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 145,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 146,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 147,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 148,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 149,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 150,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 151,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 152,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 153,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 154,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 155,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 156,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 157,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 158,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 159,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 160,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 161,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 162,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 163,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 164,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 165,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 166,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 167,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 168,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 169,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 170,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 171,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 172,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 173,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 174,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 175,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 176,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 177,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 178,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 179,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 180,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 181,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 182,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 183,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 184,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 185,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 186,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 187,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 188,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 189,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 190,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 191,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 192,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 193,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 194,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 195,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 196,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 197,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 198,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 199,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 200,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 201,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 202,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 203,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 204,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 205,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 206,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 207,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 208,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 209,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 210,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 211,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 212,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 213,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 214,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 215,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 216,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 217,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 218,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 219,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 220,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 221,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 222,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 223,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 224,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 225,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 226,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 227,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 228,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 229,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 230,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 231,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 232,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 233,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 234,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 235,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 236,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 237,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 238,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 239,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 240,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 241,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 242,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 243,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 244,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 245,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 246,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 247,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 248,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 249,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 250,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 251,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 252,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 253,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 254,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 255,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 256,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 257,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 258,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 259,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 260,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 261,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 262,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 263,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 264,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 265,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 266,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 267,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 268,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 269,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 270,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 271,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 272,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 273,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 274,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 275,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 276,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 277,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 278,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 279,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 280,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 281,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 282,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 283,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 284,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 285,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 286,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 287,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 288,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 289,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 290,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 291,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 292,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 293,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 294,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 295,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 296,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 297,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 298,
+        "campioni_validi": 1998,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9990.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 299,
+        "campioni_validi": 1999,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 9995.0,
+        "copertura_completa": false
+      },
+      {
+        "azimut": 300,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 301,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 302,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 303,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 304,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 305,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 306,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 307,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 308,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 309,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 310,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 311,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 312,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 313,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 314,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 315,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 316,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 317,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 318,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 319,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 320,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 321,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 322,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 323,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 324,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 325,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 326,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 327,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 328,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 329,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 330,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 331,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 332,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 333,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 334,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 335,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 336,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 337,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 338,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 339,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 340,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 341,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 342,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 343,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 344,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 345,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 346,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 347,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 348,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 349,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 350,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 351,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 352,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 353,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 354,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 355,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 356,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 357,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 358,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      },
+      {
+        "azimut": 359,
+        "campioni_validi": 2000,
+        "campioni_totali": 2000,
+        "distanza_valida_massima_m": 10000.0,
+        "copertura_completa": true
+      }
+    ],
+    "avvertenze": [
+      "DEM lontano assente: rilievi oltre il DEM locale non valutati.",
+      "Copertura incompleta: campioni fuori raster o NoData; orizzonte potenzialmente sottostimato."
+    ]
+  }
+}
