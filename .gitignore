@@ -4,9 +4,11 @@
 *.tf
 *.tpc
 
-# DEM e mappe raster: condivisi separatamente, come da contratto topografia
+# Raster generati esclusi; dati originali condivisi nel repository con Git LFS
 *.tif
 *.tiff
+!/3-Topography/dati_topografia/**/*.tif
+!/3-Topography/dati_topografia/**/*.tiff
 3-Topography/output/*.png
 
 # Impostazioni personali dell'editor

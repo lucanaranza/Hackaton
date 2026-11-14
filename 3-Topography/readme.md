@@ -51,6 +51,6 @@ Al polo il Sole sta a 1–2° sopra l’orizzonte, quindi una montagna a decine 
 Si prende il massimo tra i due.
 
 7. Regole pratiche
-- I .tif non vanno su GitHub, perché sono pesanti: aggiungete *.tif al .gitignore e condivideteli via Drive. Su GitHub mettete solo i JSON dell’orizzonte, che sono piccoli.
+- I .tif originali in `dati_topografia/` sono condivisi nel repository tramite Git LFS, così entrambi possiamo vedere i dati già scaricati. Le regole sono in `.gitattributes`; i raster generati in `output/` restano esclusi. Prima di aggiungere i dati eseguire `git lfs install --local`; dopo un pull usare `git lfs pull` per scaricare i raster. Vedere `dati_topografia/README.md` per l'inventario.
 - Partite da un solo sito (Shackleton rim): aprite il DEM, disegnate la mappa con matplotlib, poi calcolate l’orizzonte. Quando funziona, estendete agli altri.
 - Test rapido: confrontate il vostro orizzonte con quello che si vede su Quickmap o Moon Trek per lo stesso punto.
