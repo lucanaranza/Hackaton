@@ -1,10 +1,20 @@
 """Test di base: posizione di Sole e Terra viste dal sito di Apollo 11
 al momento dell'allunaggio (20 luglio 1969, 20:17 UTC).
 
-Risultato atteso: Sole basso (~10-11 gradi), Terra alta nel cielo.
-Al primo avvio scarica i file delle effemeridi (~17 MB) in questa cartella.
+Valori di riferimento NASA (Apollo Lunar Surface Journal, vedi FONTI.txt):
+    Sole  elevazione 10.65, azimut 88.81 gradi
+    Terra elevazione 59.4-59.7 (scritto "59:43" in tabella), azimut 272.16 gradi
+Il nostro calcolo da' Sole 10.7 / 88.8 e Terra 59.2 / 272.2 (differenze entro ~0.5 gradi,
+compatibili con quelle dichiarate dall'ALSJ tra effemeridi diverse).
+I file delle effemeridi vengono letti/scaricati in 2-Ephemerids/dati_effemeridi.
 """
-from skyfield.api import load, PlanetaryConstants
+from pathlib import Path
+
+from skyfield.api import Loader, PlanetaryConstants
+
+cartella_dati = Path(__file__).resolve().parent / "dati_effemeridi"
+cartella_dati.mkdir(exist_ok=True)
+load = Loader(str(cartella_dati))
 
 # Scala dei tempi e posizioni di Sole, Terra e Luna (file JPL DE421)
 ts = load.timescale()
