@@ -121,7 +121,7 @@ def calcola_posizioni(lat, lon, inizio, giorni=30, passo_min=10):
 
 def valuta_sito(lat, lon, inizio, giorni=30, passo_min=10, orizzonte=None):
     """Valuta un sito lunare su un intervallo di tempo.
-    
+
     Parametri
     ---------
     lat, lon   : coordinate del sito in gradi (lon positiva a est)
@@ -134,16 +134,19 @@ def valuta_sito(lat, lon, inizio, giorni=30, passo_min=10, orizzonte=None):
     inizio = tempi[0]
 
     # Margine = quanto il corpo e' sopra l'orizzonte locale (terreno incluso)
-    s_marg = s_alt - _maschera(orizzonte, s_az)
-    e_marg = e_alt - _maschera(orizzonte, e_az)
+    s_marg = s_alt - _maschera(orizzonte, s_az)                 # Compute the margin of the Sun's elevation above the local horizon (including terrain) by subtracting the interpolated horizon elevation from the Sun's altitude
+    e_marg = e_alt - _maschera(orizzonte, e_az)                 # Compute the margin of the Earth's elevation above the local horizon (including terrain) by subtracting the interpolated horizon elevation from the Earth's altitude
     sole_su = s_marg > 0
     terra_su = e_marg > 0
 
     eventi = (_trova_eventi(tempi, s_marg, 'alba', 'tramonto')
-              + _trova_eventi(tempi, e_marg, 'sorgere_terra', 'tramonto_terra'))
-    eventi.sort(key=lambda e: e['tempo'])
+              + _trova_eventi(tempi, e_marg, 'sorgere_terra', 'tramonto_terra'))   # Find the events of sunrise/sunset for the Sun and rise/set for the Earth by checking where the margin changes sign (crosses zero) and store them in a list of events
+    eventi.sort(key=lambda e: e['tempo'])   # Sort the list of events by their occurrence time in ascending order
 
     def prossimo(tipo):
+        '''
+        Return the timedelta until the next event of the specified type (e.g., 'alba', 'tramonto', 'sorgere_terra', 
+        'tramonto_terra') from the start time. If no such event occurs within the analyzed period, return None.'''
         for e in eventi:
             if e['tipo'] == tipo:
                 return e['tempo'] - inizio
@@ -156,15 +159,18 @@ def valuta_sito(lat, lon, inizio, giorni=30, passo_min=10, orizzonte=None):
     al_tramonto_terra = prossimo('tramonto_terra') if terra_su[0] else None
 
     def testo_tramonto(visibile, td):
+        '''Return a string describing the time until sunset for the Sun or Earth, or indicate if it is already below the horizon.'''
         if not visibile:
             return "gia' sotto l'orizzonte"
         return _durata_testo(td) if td is not None else oltre
 
     def testo_sorgere(visibile, td):
+        '''Return a string describing the time until sunrise for the Sun or Earth, or indicate if it is already above the horizon.'''
         if visibile:
             return None
         return _durata_testo(td) if td is not None else f"oltre {giorni}g (non sorge nel periodo)"
-
+    
+    # Main matrics dictionaty - for json output
     metriche = {
         "sole_visibile_ora": bool(sole_su[0]),
         "terra_visibile_ora": bool(terra_su[0]),
