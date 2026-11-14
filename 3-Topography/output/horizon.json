@@ -370,7 +370,7 @@
     "raggio_lunare_m": 1737400.0,
     "frame": "MOON_ME_DE421 (da verificare per DEM esterni)",
     "azimut": "0=Nord geografico, 90=Est, 180=Sud, 270=Ovest",
-    "dem_vicino": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton\\3-Topography\\dati_topografia\\Sito 01\\Site01_final_adj_5mpp_surf.tif",
+    "dem_vicino": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton\\3-Topography\\dati_topografia\\Sito_01\\Site01_final_adj_5mpp_surf.tif",
     "dem_lontano": null,
     "passo_vicino_m": 5.0,
     "passo_lontano_m": 100.0,

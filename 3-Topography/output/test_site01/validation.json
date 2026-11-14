@@ -1,0 +1,119 @@
+{
+  "files": {
+    "surf": {
+      "path": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton\\3-Topography\\dati_topografia\\Sito_01\\Site01_final_adj_5mpp_surf.tif",
+      "shape": [
+        3200,
+        3200
+      ],
+      "resolution_m": [
+        5.0,
+        5.0
+      ],
+      "statistics": {
+        "count": 10240000,
+        "min": -523.1834106445312,
+        "max": 1959.4962158203125,
+        "mean": 1139.0587825653126,
+        "std": 422.1791279242874,
+        "p5": 331.3763122558594,
+        "p50": 1200.248779296875,
+        "p95": 1729.095458984375
+      },
+      "missing_pct": 0.0
+    },
+    "slp": {
+      "path": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton\\3-Topography\\dati_topografia\\Sito_01\\Site01_final_adj_5mpp_slp.tif",
+      "shape": [
+        3200,
+        3200
+      ],
+      "resolution_m": [
+        5.0,
+        5.0
+      ],
+      "statistics": {
+        "count": 10240000,
+        "min": 0.0,
+        "max": 64.58820343017578,
+        "mean": 12.597746371874557,
+        "std": 5.893107513604315,
+        "p5": 3.6481387615203857,
+        "p50": 12.29025936126709,
+        "p95": 22.805200576782227
+      },
+      "missing_pct": 0.0
+    },
+    "toterr": {
+      "path": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton\\3-Topography\\dati_topografia\\Sito_01\\Site01_final_adj_5mpp_toterr.tif",
+      "shape": [
+        3200,
+        3200
+      ],
+      "resolution_m": [
+        5.0,
+        5.0
+      ],
+      "statistics": {
+        "count": 10240000,
+        "min": 0.061578184366226196,
+        "max": 5.582818508148193,
+        "mean": 0.4045424510687775,
+        "std": 0.18121929467481138,
+        "p5": 0.18534959852695465,
+        "p50": 0.37194737792015076,
+        "p95": 0.7311333417892456
+      },
+      "missing_pct": 0.0
+    },
+    "ldec": {
+      "path": "C:\\Users\\cater\\OneDrive\\Desktop\\università\\EXTRA\\Hackaton NASA\\Hackaton\\3-Topography\\dati_topografia\\Sito_01\\Site01_final_adj_5mpp_ldec.tif",
+      "shape": [
+        3200,
+        3200
+      ],
+      "resolution_m": [
+        5.0,
+        5.0
+      ],
+      "statistics": {
+        "count": 10240000,
+        "min": 0.0,
+        "max": 5.0,
+        "mean": 0.0999919921875,
+        "std": 0.3169594930718671,
+        "p5": 0.0,
+        "p50": 0.0,
+        "p95": 1.0
+      },
+      "missing_pct": 0.0,
+      "zero_count_pct_of_valid": 90.5058203125
+    }
+  },
+  "checks": [
+    "Tutti i quattro raster sono leggibili e allineati a 5 m/pixel",
+    "Pendenze in [0,90], incertezze non negative, conteggi interi non negativi",
+    "360 valori finiti; otto azimut verificati con interpolazione bilineare indipendente",
+    "JSON compatibile con la funzione _maschera del motore effemeridi"
+  ],
+  "slope_comparison": {
+    "pixels": 10227204,
+    "mean_difference_deg": -4.79581850274574e-07,
+    "mean_absolute_difference_deg": 0.00017722369112820643,
+    "p95_absolute_difference_deg": 0.00048065185546875,
+    "note": "Differenze possibili per metodo/baseline: lo script usa differenze centrate, non sostituisce la mappa ufficiale."
+  },
+  "horizon": {
+    "min_deg": -4.618665633087494,
+    "max_deg": 2.2183641374917586,
+    "ground_m": 1944.8283386234887,
+    "independent_max_difference_deg": 1.0857981180834031e-13,
+    "directions_with_complete_near_coverage": 64,
+    "warnings": [
+      "DEM lontano assente: rilievi oltre il DEM locale non valutati.",
+      "Copertura incompleta: campioni fuori raster o NoData; orizzonte potenzialmente sottostimato."
+    ]
+  },
+  "note": "Lo script usa surf per l'orizzonte; slp, toterr e ldec sono controllati qui come prodotti di pendenza e qualita. Non costituiscono un DEM lontano.",
+  "status": "PASS"
+}
