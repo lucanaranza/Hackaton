@@ -1,0 +1,1 @@
+Get-ChildItem "$topo\risultati_v2" -Directory | ForEach-Object { $csv = Join-Path $_.FullName "site_cells.csv"; if (Test-Path $csv) { $nome = $_.Name.Substring(0,1).ToUpper() + $_.Name.Substring(1); Write-Host "== $nome"; .\.venv\Scripts\python.exe mappatura.py --celle $csv --far $far --nome $nome --uscita "out_v2\$nome" --passo-tempo 60 --passo-evoluzione 60 } }

@@ -1,0 +1,1 @@
+Get-ChildItem C:\Users\lucan\Desktop\Hackaton_Ephemerids\out_v2 -Recurse -Include mappa_*.json,evoluzione_*.json | Copy-Item -Destination C:\Users\lucan\Desktop\Lunar_Webapp\data\sites -Force

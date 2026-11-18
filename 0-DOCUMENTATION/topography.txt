@@ -1,0 +1,1 @@
+Get-ChildItem dati_siti_topografia -Directory | ForEach-Object { $dem = Get-ChildItem $_.FullName -Filter *_surf.tif | Select-Object -First 1; Write-Host "== $($_.Name)"; .\.venv\Scripts\python.exe scripts\script.py --mode metrics --no-rasters --no-plot --input $dem.FullName --output "risultati_v2\$($_.Name)" }
