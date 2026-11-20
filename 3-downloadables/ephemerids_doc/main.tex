@@ -1,0 +1,1216 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{longtable,booktabs,array,calc}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{newunicodechar}
+
+% Unicode symbols used in the text (keeps the file pdfLaTeX-compatible)
+\newunicodechar{°}{\ensuremath{^\circ}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{²}{\ensuremath{^2}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{φ}{\ensuremath{\varphi}}
+\newunicodechar{₀}{\ensuremath{_0}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{∂}{\ensuremath{\partial}}
+\newunicodechar{∇}{\ensuremath{\nabla}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+
+\newunicodechar{⁻}{\ensuremath{^{-}}}
+\newunicodechar{³}{\ensuremath{^3}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+\newunicodechar{½}{\ensuremath{\tfrac12}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{⇔}{\ensuremath{\Leftrightarrow}}
+\definecolor{codebg}{RGB}{246,247,249}
+\definecolor{codekw}{RGB}{0,82,155}
+\definecolor{codecm}{RGB}{110,120,110}
+\definecolor{codestr}{RGB}{163,21,21}
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecm}\itshape,
+  stringstyle=\color{codestr},
+  backgroundcolor=\color{codebg},
+  frame=single, rulecolor=\color{black!15},
+  breaklines=true, postbreak=\mbox{$\hookrightarrow$\space},
+  columns=fullflexible, keepspaces=true, showstringspaces=false,
+  xleftmargin=2pt, xrightmargin=2pt,
+  literate={°}{{$^\circ$}}1 {²}{{$^2$}}1 {−}{{-}}1 {×}{{$\times$}}1
+           {≤}{{$\leq$}}1 {≥}{{$\geq$}}1 {→}{{$\rightarrow$}}1 {·}{{$\cdot$}}1
+           {…}{{\ldots}}1 {–}{{--}}1 {—}{{---}}1 {“}{{``}}1 {”}{{''}}1
+}
+\lstset{literate={°}{{$^\circ$}}1 {²}{{$^2$}}1 {−}{{-}}1 {×}{{$\times$}}1
+           {≤}{{$\leq$}}1 {≥}{{$\geq$}}1 {→}{{$\rightarrow$}}1 {·}{{$\cdot$}}1
+           {…}{{\ldots}}1 {–}{{--}}1 {—}{{---}}1 {“}{{``}}1 {”}{{''}}1}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\sloppy
+\setlength{\parskip}{4pt}
+\hypersetup{colorlinks=true, linkcolor=codekw, urlcolor=codekw}
+
+\title{L.A.N.D.\ Ephemerides\\[2pt]\large Documentation}
+\author{NASA Space Apps - Patos team - Luca Naranza}
+\date{20 November 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+The ephemerides pipeline answers the question the topography cannot:
+\emph{from this point on the Moon, when are the Sun and the Earth above
+the real terrain?} From that it derives illumination, solar energy and
+direct-to-Earth communication, per cell and over time. Everything lives
+in \texttt{Hackaton\_Ephemerids/}.
+
+\textbf{Files}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+File
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Role
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{effemeridi.py} & Ephemeris engine for
+\textbf{one point}: Sun/Earth elevation and azimuth over time,
+sunrise/sunset events, energy, communication and dust metrics \\
+\texttt{mappatura.py} & \textbf{Area} mapping: computes
+the horizon for every cell of a grid over a site and runs the
+ephemerides for all cells at once (static map + time evolution) \\
+\texttt{tabella\_sole\_terra.py} & Pre-computes an
+hourly table of sub-solar and sub-Earth points for the web app \\
+\texttt{tabella\_sole\_terra.js} & Browser code that
+uses that table to get Sun/Earth elevation and azimuth from any site
+without Python \\
+\texttt{test\_luna.py} & Validation against the Apollo
+11 landing (NASA reference values) \\
+\texttt{dati\_effemeridi/} & JPL/NAIF kernels:
+\texttt{de421.bsp},
+\texttt{moon\_080317.tf},
+\texttt{pck00008.tpc},
+\texttt{moon\_pa\_de421\_1900-2050.bpc} \\
+\texttt{out\_v2/Sito\_*/} & Per-site results:
+\texttt{mappa\_*.json},
+\texttt{mappa\_*.png},
+\texttt{evoluzione\_*.json} \\
+\texttt{riepilogo\_mappe.csv/json} & One summary row
+per site (cells, landable cells, medians, best cell) \\
+\texttt{tabella\_sole\_terra.json} & The web-app table
+(26 305 hourly instants from 2026-01-01, 3 years) \\
+\texttt{output/} & Check plots from
+\texttt{effemeridi.py} (Apollo 11, south pole) \\
+\end{longtable}
+
+\textbf{Data flow}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{site\_cells.csv} from the topography pipeline
+  (100 m cells) gives the near terrain and the slope of each cell.
+\item
+  \texttt{LDEM\_60S\_240MPP\_ADJ} (240 m/px) gives the
+  far terrain out to 200 km.
+\item
+  \texttt{mappatura.py} builds a grid of 500 m cells
+  over the site, computes a 360° horizon for each cell, then evaluates
+  Sun and Earth for each cell every hour for a year.
+\item
+  Results: a static map (yearly percentages) and a time evolution (one
+  bit per cell per hour, for the web app's time slider).
+\end{enumerate}
+
+\textbf{The ephemeris kernels}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Kernel
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Content
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{de421.bsp} & JPL DE421 planetary ephemeris:
+positions of Sun, Earth, Moon \\
+\texttt{moon\_pa\_de421\_1900-2050.bpc} & Lunar
+orientation (principal axes, physical librations) consistent with DE421,
+valid 1900--2050 \\
+\texttt{moon\_080317.tf} & Frame kernel that defines
+\texttt{MOON\_ME\_DE421} (mean Earth / polar axis), the
+frame LOLA products are expressed in \\
+\texttt{pck00008.tpc} & Planetary constants (radii,
+orientation models) \\
+\end{longtable}
+
+Using \texttt{MOON\_ME\_DE421} is what makes the
+ephemerides and the LOLA DEMs share the same latitude/longitude: a
+site's coordinates mean the same point in both pipelines.
+
+\textbf{Example (Sito\_NPA,
+\texttt{out\_v2/Sito\_NPA})}: 40 × 40 cells of 500 m
+(20 × 20 km), year 2027, hourly. Light ranges 0--34.5 \% of the time
+(mean 18.1 \%), useful communication 0--46.7 \%, light + communication
+0--16.7 \%; longest continuous darkness at the best cell 573 h
+(\textasciitilde24 days). Best landable cell: −87.0504°, −74.6045°, 5.0°
+mean slope.
+
+Conventions (identical to the topography pipeline): times UTC ISO 8601;
+angles in degrees; azimuth from north (0°) towards east (90°); latitude
+positive north, longitude positive east; Moon as a sphere of R = 1 737
+400 m.
+
+\hypertarget{how-the-pipeline-runs-step-by-step}{%
+\section{How the pipeline runs: step by
+step}\label{how-the-pipeline-runs-step-by-step}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{mappatura.py} reads the topography cells from
+  a path given on the command line (\texttt{--celle}):
+  the CSV stays in the topography folder, no copy is kept in the
+  ephemerides folder.
+\item
+  It uses the functions of \texttt{effemeridi.py}
+  (kernel loading, solar-disk fraction, constants) for the ephemeris
+  calculation.
+\item
+  The ephemerides come from JPL (DE421 and the lunar orientation
+  kernels), stored in \texttt{dati\_effemeridi/} and
+  valid until 2050.
+\item
+  For every cell it computes the terrain obstruction (its own 360°
+  horizon, near + far DEM) and compares it with the elevation and
+  azimuth of the Sun and the Earth.
+\item
+  It computes illumination, energy and communication in two ways, both
+  with a 1 h time step over one year:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{static} (\texttt{mappa\_*.json}): no time
+    series is stored; every quantity is reduced to a yearly percentage
+    or maximum per cell;
+  \item
+    \textbf{dynamic} (\texttt{evoluzione\_*.json}): a
+    boolean array of size \emph{n\_instants × n\_cells} (grid rows ×
+    columns flattened), preallocated with zeros and filled time step by
+    time step, then packed into bits.
+  \end{itemize}
+\item
+  Results are saved in one sub-folder per site in
+  \texttt{out\_v2/}.
+\end{enumerate}
+
+Command used for all sites (PowerShell, from
+\texttt{Hackaton\_Ephemerids}):
+
+\begin{lstlisting}
+Get-ChildItem "$topo\risultati_v2" -Directory | ForEach-Object {
+  $csv = Join-Path $_.FullName "site_cells.csv"
+  if (Test-Path $csv) {
+    $nome = $_.Name.Substring(0,1).ToUpper() + $_.Name.Substring(1)
+    Write-Host "== $nome"
+    .\.venv\Scripts\python.exe mappatura.py --celle $csv --far $far --nome $nome `
+        --uscita "out_v2\$nome" --passo-tempo 60 --passo-evoluzione 60 }
+}
+\end{lstlisting}
+
+\texttt{\$topo} is the topography results root and
+\texttt{\$far} the regional LDEM. Since
+\texttt{--passo} is not given, cells are 500 m;
+\texttt{--inizio} and
+\texttt{--giorni} keep their defaults (2027-01-01, 365
+days).
+
+\hypertarget{the-point-engine-effemeridi.py-429-lines}{%
+\section{\texorpdfstring{The point engine: \texttt{effemeridi.py} (429
+lines)}{The point engine: effemeridi.py (429 lines)}}\label{the-point-engine-effemeridi.py-429-lines}}
+
+\hypertarget{module-setup-3859}{%
+\subsection{Module setup (38--59)}\label{module-setup-3859}}
+
+\begin{lstlisting}[language=Python]
+46  _CARTELLA_DATI = Path(__file__).resolve().parent / "dati_effemeridi"
+47  _CARTELLA_DATI.mkdir(exist_ok=True)
+48  _load = Loader(str(_CARTELLA_DATI), verbose=True)
+50  _cache = {}
+53  RAGGIO_SOLE_KM = 695_700.0
+56  MARGINE_COM_DEG = 0.5
+57  PERDITA_INIZIALE_POLVERE_PCT = 0.0
+58  DEGRADO_POLVERE_ANNUO_PCT = 1.3
+59  SOGLIA_SOLE_RADENTE_DEG = 5.0
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{46--48} Skyfield \texttt{Loader} bound to
+  \texttt{dati\_effemeridi/}: kernels are read from
+  there, and downloaded there automatically if missing (they are
+  excluded from Git).
+\item
+  \textbf{50} Module-level cache so the kernels are parsed only once per
+  process.
+\item
+  \textbf{53} IAU 2015 nominal solar radius, used for the apparent size
+  of the Sun.
+\item
+  \textbf{56--59} Default environmental assumptions (sources in
+  \texttt{FONTI.txt}):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Earth is useful for a direct link only ≥ 0.5° above the terrain
+    (ridge diffraction / Fresnel zone, multipath on regolith at grazing
+    angles);
+  \item
+    no initial landing-dust loss by default (a what-if parameter);
+  \item
+    1.3 \%/year panel degradation, from the Apollo Dust Detector (4--10
+    \% in 2000 days → 0.7--1.8 \%/year);
+  \item
+    Sun ``grazing'' below 5° above the terrain.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{risorse-6273}{%
+\subsection{\texorpdfstring{\texttt{\_risorse()}
+(62--73)}{\_risorse() (62--73)}}\label{risorse-6273}}
+
+\begin{lstlisting}[language=Python]
+65          ts = _load.timescale()
+66          eph = _load('de421.bsp')
+67          pc = PlanetaryConstants()
+68          pc.read_text(_load('moon_080317.tf'))
+69          pc.read_text(_load('pck00008.tpc'))
+70          pc.read_binary(_load('moon_pa_de421_1900-2050.bpc'))
+71          frame = pc.build_frame_named('MOON_ME_DE421')
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{65} Time scale (UTC $\leftrightarrow$ TT/TDB conversions, leap seconds).
+\item
+  \textbf{66} DE421 positions of Sun, Earth and Moon.
+\item
+  \textbf{67--70} Loads the frame definition, the constants and the
+  binary lunar orientation. Together they give the Moon's true
+  orientation at any instant, librations included.
+\item
+  \textbf{71} Builds the body-fixed
+  \texttt{MOON\_ME\_DE421} frame --- the same one the
+  LOLA DEMs use.
+\item
+  \textbf{72} Stores everything in the cache.
+\end{itemize}
+
+\hypertarget{helpers-76151}{%
+\subsection{Helpers (76--151)}\label{helpers-76151}}
+
+\textbf{\texttt{\_maschera(orizzonte, azimut)}
+(76--82)} --- horizon elevation in the direction of the Sun or Earth.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{78--79} No horizon → flat sphere, 0° everywhere.
+\item
+  \textbf{81} Azimuths 0, 1, \ldots, 359° for the 360 horizon values.
+\item
+  \textbf{82} \texttt{np.interp(..., period=360)}:
+  linear interpolation that wraps around 360° → 0°.
+\end{itemize}
+
+\textbf{\texttt{\_trova\_eventi(tempi, margine, ...)}
+(85--98)} --- finds rise/set events.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{91--93} Scans consecutive samples of the margin (elevation −
+  horizon) for a sign change.
+\item
+  \textbf{94--95} Linear interpolation of the zero crossing: fraction
+  \texttt{a/(a−b)} of the interval. With a 10 min step
+  the error is a few minutes.
+\item
+  \textbf{96} Rising if the margin increases, setting otherwise.
+\end{itemize}
+
+\textbf{\texttt{\_ore} (101--103)}: hours = number of
+\texttt{True} samples × step / 60.
+\textbf{\texttt{\_durata\_testo} (106--113)}: timedelta
+→ \texttt{"4g 7h 12m"} (days, hours, minutes).
+\textbf{\texttt{\_iso} (116--118)}: ISO 8601 UTC string
+with \texttt{Z}, readable by JavaScript
+\texttt{Date}.
+
+\textbf{\texttt{\_frazione\_disco(u)} (121--130)} ---
+visible fraction of the solar disk.
+
+\begin{lstlisting}[language=Python]
+129      u = np.clip(u, -1.0, 1.0)
+130      return 1.0 - (np.arccos(u) - u * np.sqrt(1.0 - u * u)) / np.pi
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{u} = (centre elevation − horizon) / apparent
+  radius. The hidden part is a circular segment of area (arccos u −
+  $u\sqrt{1-u^2}$)·r²; dividing by πr² gives the hidden fraction. So u = −1 → 0
+  (hidden), u = 0 → ½, u = 1 → 1 (fully visible). The terrain is assumed
+  locally straight across the disk's width (\textasciitilde0.5°).
+\end{itemize}
+
+\textbf{\texttt{\_sequenza\_piu\_lunga} (133--151)} ---
+longest run of consecutive \texttt{True} samples
+(e.g.~continuous darkness) in hours, plus a flag that is
+\texttt{True} if that run touches the start or end of
+the period (the real duration may then be longer).
+
+\hypertarget{positions-calcola_posizioni-and-_calcola_completo-154185}{%
+\subsection{\texorpdfstring{Positions: \texttt{calcola\_posizioni} and
+\texttt{\_calcola\_completo}
+(154--185)}{Positions: calcola\_posizioni and \_calcola\_completo (154--185)}}\label{positions-calcola_posizioni-and-_calcola_completo-154185}}
+
+\begin{lstlisting}[language=Python]
+171      if inizio.tzinfo is None:
+172          inizio = inizio.replace(tzinfo=timezone.utc)
+173      n = int(giorni * 24 * 60 / passo_min) + 1
+174      tempi = [inizio + timedelta(minutes=passo_min * k) for k in range(n)]
+175      t = ts.from_datetimes(tempi)
+177      sito = eph['moon'] + pc.build_latlon_degrees(frame, lat, lon)
+178      osservatore = sito.at(t)
+181      for corpo in (eph['sun'], eph['earth']):
+182          alt, az, dist = osservatore.observe(corpo).apparent().altaz()
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{171--172} A naive datetime is taken as UTC.
+\item
+  \textbf{173--175} \texttt{n} instants including both
+  ends; one vectorised Skyfield \texttt{Time} array.
+\item
+  \textbf{177} The observer: the Moon's centre plus a point on the lunar
+  surface at (lat, lon) in \texttt{MOON\_ME\_DE421}.
+  Height 0, i.e.~on the reference sphere.
+\item
+  \textbf{178} Observer position at all instants.
+\item
+  \textbf{181--182} For Sun and Earth:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{observe()} corrects for \textbf{light time}
+    (where the body was when the light left it);
+  \item
+    \texttt{apparent()} adds \textbf{aberration} and
+    gravitational deflection;
+  \item
+    \texttt{altaz()} converts to elevation/azimuth in
+    the site's local horizon frame.
+  \end{itemize}
+
+  Because the observer is on the surface and not at the Moon's centre,
+  \textbf{parallax} is included --- it matters for the Earth (up to
+  \textasciitilde0.26°).
+\item
+  \texttt{calcola\_posizioni} (154--160) is the public
+  version without distances.
+\end{itemize}
+
+\hypertarget{valuta_sito...-188337-the-main-function}{%
+\subsection{\texorpdfstring{\texttt{valuta\_sito(...)} (188--337) ---
+the main
+function}{valuta\_sito(...) (188--337) --- the main function}}\label{valuta_sito...-188337-the-main-function}}
+
+\textbf{Margins (207--214)}
+
+\begin{lstlisting}[language=Python]
+211      s_marg = s_alt - _maschera(orizzonte, s_az)
+212      e_marg = e_alt - _maschera(orizzonte, e_az)
+213      sole_su = s_marg > 0
+214      terra_su = e_marg > 0
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{margin} is how far a body's centre is above the local
+  terrain at its azimuth. Visible ⇔ margin \textgreater{} 0. Everything
+  else is derived from these two arrays.
+\end{itemize}
+
+\textbf{Energy (216--225)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{217} Apparent solar radius
+  \texttt{asin(R\_sun / distance)} ≈ 0.27°.
+\item
+  \textbf{218} Visible disk fraction from the margin.
+\item
+  \textbf{221--223} Dust factor: (1 − initial loss) × (1 − annual rate ×
+  elapsed years), clipped to {[}0, 1{]}.
+\item
+  \textbf{225} Relative power of a panel that \textbf{always points at
+  the Sun}: disk fraction × dust factor (1 = full disk, clean panels).
+  Panel tilt and Sun-distance variation are not modelled.
+\end{itemize}
+
+\textbf{Communication and environment (227--233)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{228} Useful link: Earth margin \textgreater{} 0.5°.
+\item
+  \textbf{231} Grazing Sun: visible but \textless{} 5° above terrain
+  (terminator, electrostatic dust).
+\item
+  \textbf{232--233} Longest darkness and longest period without useful
+  communication.
+\end{itemize}
+
+\textbf{Events (235--264)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{235--237} Sun and Earth rise/set events, merged and sorted by
+  time.
+\item
+  \textbf{239--246} \texttt{prossimo(tipo)}: time from
+  the start to the first event of a type.
+\item
+  \textbf{250--264} Human-readable texts: time to sunset (only if the
+  Sun is up now), ``already below the horizon'', or ``beyond N days'' if
+  no event happens in the period.
+\end{itemize}
+
+\textbf{Metrics (267--311)} --- grouped in the JSON as:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Group
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Keys
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Now & \texttt{sole\_visibile\_ora},
+\texttt{terra\_visibile\_ora}, current elevations,
+times to sunset / Earth-set / next sunrise / next Earth-rise \\
+Totals & \texttt{ore\_di\_luce},
+\texttt{ore\_terra\_visibile},
+\texttt{ore\_luce\_e\_comunicazione}, percentages, max
+Sun elevation, Earth elevation range \\
+Energy & current power \%, mean energy \%, equivalent full-power hours,
+hours with Sun partly covered, dust factor at the end \\
+Communication & useful hours and \%, light + useful communication,
+longest gap and its edge flag \\
+Survival & longest continuous darkness (cold: insulating regolith) and
+its edge flag \\
+Dust & grazing-Sun hours, \% of light that is grazing, number of
+light/dark transitions, qualitative risk \\
+\end{longtable}
+
+\textbf{Output (313--337)}: site, period, whether a real horizon was
+used, assumptions, metrics, events and full time series (elevations,
+azimuths, disk fraction, power, communication flags).
+
+\hypertarget{rischio_polverem-340357}{%
+\subsection{\texorpdfstring{\texttt{\_rischio\_polvere(m)}
+(340--357)}{\_rischio\_polvere(m) (340--357)}}\label{rischio_polverem-340357}}
+
+\begin{itemize}
+\tightlist
+\item
+  Qualitative risk of electrostatic dust, which is most mobile near the
+  terminator.
+\item
+  \textbf{352} Light/dark transitions normalised to 30 days (a normal
+  lunar day has 2).
+\item
+  \textbf{353--357} ``high'' if ≥ 60 \% of the light is grazing or ≥ 6
+  transitions / 30 days; ``medium'' if ≥ 20 \% or ≥ 4; else ``low''.
+  Thresholds chosen by the team, not from literature (stated in the
+  code).
+\end{itemize}
+
+\hypertarget{grafico-_stampa-and-the-self-test-360429}{%
+\subsection{\texorpdfstring{\texttt{grafico}, \texttt{\_stampa} and the
+self-test
+(360--429)}{grafico, \_stampa and the self-test (360--429)}}\label{grafico-_stampa-and-the-self-test-360429}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{360--386} Plot of Sun/Earth elevation vs time with relative
+  power as a shaded area.
+\item
+  \textbf{389--413} Console summary.
+\item
+  \textbf{416--429} Two examples: Apollo 11 from the landing (20 July
+  1969, 30 days) and a point at 89.5° S from 14 Nov 2026, with plots
+  saved in \texttt{output/}.
+\end{itemize}
+
+\hypertarget{the-area-engine-mappatura.py-539-lines}{%
+\section{\texorpdfstring{The area engine: \texttt{mappatura.py} (539
+lines)}{The area engine: mappatura.py (539 lines)}}\label{the-area-engine-mappatura.py-539-lines}}
+
+\hypertarget{constants-5155}{%
+\subsection{Constants (51--55)}\label{constants-5155}}
+
+\begin{lstlisting}[language=Python]
+51  R_LUNA_M = 1_737_400.0
+52  LUNA_LONLAT = f"+proj=longlat +R={R_LUNA_M} +no_defs"
+53  CRS_POLARE = (f"+proj=stere +lat_0=-90 +lat_ts=-90 +lon_0=0 +x_0=0 +y_0=0 "
+54                f"+R={R_LUNA_M} +units=m +no_defs")
+55  PENDENZA_MAX_DEG = 10.0
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{52} Lunar lon/lat on the sphere (never EPSG:4326).
+\item
+  \textbf{53--54} South polar stereographic, true scale at the pole,
+  central meridian 0° --- the projection of the PGDA south-pole
+  products.
+\item
+  \textbf{55} Same 10° landing threshold as the topography pipeline.
+\end{itemize}
+
+\hypertarget{class-dem-61116}{%
+\subsection{\texorpdfstring{\texttt{class\ DEM}
+(61--116)}{class DEM (61--116)}}\label{class-dem-61116}}
+
+\textbf{Constructor (64--84)}, two modes:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{65--71} DEM already in memory (built from the CSV).
+\item
+  \textbf{73--83} DEM from a GeoTIFF, optionally reading only a window
+  around the site (\texttt{from\_bounds}, rounded and
+  clipped to the raster). Scale/offset applied, NoData → NaN, window
+  transform kept so pixel coordinates stay correct.
+\end{itemize}
+
+\textbf{\texttt{da\_celle(csv\_path)} (86--103)} ---
+rebuilds a 100 m DEM from \texttt{site\_cells.csv}:
+
+\begin{lstlisting}[language=Python]
+91      x, y = d["x_m"].astype(float), d["y_m"].astype(float)
+92      passo = float(np.median(d["width_m"]))
+94      col = np.round((x - x0) / passo).astype(int)
+95      row = np.round((y1 - y) / passo).astype(int)
+97      z[row, col] = d["elevation_mean_m"].astype(float)
+98      tr = rasterio.transform.from_origin(x0 - passo / 2, y1 + passo / 2, passo, passo)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{91--92} Cell centres and cell size (median width: robust to
+  clipped edge cells).
+\item
+  \textbf{94--95} Each cell centre → integer row/column (rows from the
+  top, y decreasing).
+\item
+  \textbf{97} The raster value is the cell's \textbf{mean} elevation.
+\item
+  \textbf{98} The transform puts the grid's top-left corner half a cell
+  outside the first centre.
+\item
+  \textbf{100--102} Keeps per-cell mean slope and \% area ≤ 10° for the
+  landing classification.
+\end{itemize}
+
+\textbf{\texttt{campiona(x, y)} (105--116)}: bilinear
+sampling with the same −0.5 corner→centre correction as the topography
+sampler; NaN outside the DEM.
+
+\hypertarget{orizzonte_celle...-122163-a-horizon-for-every-cell}{%
+\subsection{\texorpdfstring{\texttt{orizzonte\_celle(...)} (122--163)
+--- a horizon for every
+cell}{orizzonte\_celle(...) (122--163) --- a horizon for every cell}}\label{orizzonte_celle...-122163-a-horizon-for-every-cell}}
+
+\begin{lstlisting}[language=Python]
+133      az = np.radians(np.arange(n_az) * 360.0 / n_az)
+134      d_v = np.arange(passo_vicino, dist_vicina + 1e-6, passo_vicino)
+135      d_l = np.arange(dist_vicina + passo_lontano, dist_max + 1e-6, passo_lontano) if lontano else np.array([])
+137      caduta = dist ** 2 / (2 * R_LUNA_M)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{133} 360 azimuths.
+\item
+  \textbf{134--135} Near samples every 10 m to 10 km; far samples every
+  240 m (= the regional pixel) to 200 km.
+\item
+  \textbf{137} Curvature drop d²/2R, as in
+  \texttt{horizon.py}.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+142          rho = np.hypot(x0, y0)
+143          nx, ny = x0 / rho, y0 / rho
+144          ex, ey = ny, -nx
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{142--144} Local axes in the projection plane. In a south polar
+  stereographic map, \textbf{geographic north} at any point is the
+  direction \textbf{away from the pole}, i.e.~the unit radial vector;
+  east is that vector rotated 90° clockwise. Because the projection is
+  conformal, an angle measured in the map equals the angle on the
+  ground, so azimuths built this way are true geographic azimuths.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+145          z0 = vicino.campiona(np.array([x0]), np.array([y0]))[0]
+146          if not np.isfinite(z0) and lontano:
+147              z0 = lontano.campiona(np.array([x0]), np.array([y0]))[0]
+151          dx = np.cos(az)[:, None] * nx + np.sin(az)[:, None] * ex
+152          dy = np.cos(az)[:, None] * ny + np.sin(az)[:, None] * ey
+153          px = x0 + dx * dist[None, :]
+154          py = y0 + dy * dist[None, :]
+157          h[:, :nv] = vicino.campiona(px[:, :nv], py[:, :nv])
+159              buchi = ~np.isfinite(h)
+160              h[buchi] = lontano.campiona(px[buchi], py[buchi])
+161          ang = np.degrees(np.arctan2(h - z0 - altezza_oss - caduta[None, :], dist[None, :]))
+162          oriz[k] = np.nanmax(np.where(np.isfinite(ang), ang, -90.0), axis=1)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{145--149} Ground elevation from the near DEM, else the far
+  DEM; cells with no data are skipped.
+\item
+  \textbf{151--154} All 360 rays at once: direction vectors, then a
+  matrix of sample points (360 × n\_distances). Rays are
+  \textbf{straight lines in the map plane}, not great circles.
+\item
+  \textbf{157--160} Near DEM out to 10 km, regional DEM fills every gap
+  (beyond 10 km and outside the site DEM).
+\item
+  \textbf{161} Same elevation-angle formula as the topography pipeline,
+  observer 2 m above the ground.
+\item
+  \textbf{162} Horizon = maximum angle per azimuth. Missing samples
+  count as −90° (no obstruction).
+\end{itemize}
+
+\hypertarget{sun-and-earth-for-all-cells-169212}{%
+\subsection{Sun and Earth for all cells
+(169--212)}\label{sun-and-earth-for-all-cells-169212}}
+
+\textbf{\texttt{vettori\_sole\_terra(inizio, giorni, passo\_min)}
+(169--180)}
+
+\begin{lstlisting}[language=Python]
+177      luna = eph['moon'].at(t)
+178      sole = luna.observe(eph['sun']).apparent().frame_xyz(frame).km
+179      terra = luna.observe(eph['earth']).apparent().frame_xyz(frame).km
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  Apparent positions seen from the \textbf{Moon's centre}, expressed
+  directly in \texttt{MOON\_ME\_DE421}: arrays (3,
+  n\_instants) in km. Computed once and reused for every cell --- this
+  is what makes the area map affordable.
+\end{itemize}
+
+\textbf{\texttt{\_assi\_locali(lat, lon)} (183--188)}:
+for each cell, the unit vectors \emph{up}, \emph{east}, \emph{north} in
+the lunar body frame.
+
+\textbf{\texttt{elev\_az(corpo\_km, lat, lon, quota\_m)}
+(191--201)}
+
+\begin{lstlisting}[language=Python]
+195      p = su * ((R_LUNA_M + np.nan_to_num(quota_m)) / 1000.0)
+196      v = corpo_km[:, None, :] - p[:, :, None]
+198      el = np.degrees(np.arcsin(np.einsum('ict,ic->ct', v, su) / dist))
+199      az = np.degrees(np.arctan2(np.einsum('ict,ic->ct', v, est),
+200                                 np.einsum('ict,ic->ct', v, nord))) % 360.0
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{195} Cell position: radius R + elevation along the \emph{up}
+  vector.
+\item
+  \textbf{196} Vector from the cell to the body, for every cell and
+  instant (3 × cells × instants). Subtracting the cell position is the
+  \textbf{parallax} correction.
+\item
+  \textbf{198} Elevation = asin(component along \emph{up} / distance).
+\item
+  \textbf{199--200} Azimuth = atan2(east component, north component),
+  from north towards east.
+\end{itemize}
+
+\textbf{\texttt{\_interp\_orizzonte(oriz, az)}
+(204--212)}: horizon of each cell at the body's azimuth, linear between
+the two neighbouring degrees, wrapping 359° → 0°.
+
+\textbf{\texttt{\_sequenza\_max(b, passo\_min)}
+(215--224)}: longest run of \texttt{True} per row,
+vectorised with \texttt{np.diff} of the padded boolean
+row (+1 = run start, −1 = run end).
+
+\hypertarget{static-metrics-metriche_celle-230261}{%
+\subsection{\texorpdfstring{Static metrics: \texttt{metriche\_celle}
+(230--261)}{Static metrics: metriche\_celle (230--261)}}\label{static-metrics-metriche_celle-230261}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{235--237} Dust factor over time, as in
+  \texttt{effemeridi.py}.
+\item
+  \textbf{241--247} Cells processed in blocks of 48, so the (cells ×
+  instants) arrays stay small; cells without ground elevation are
+  skipped.
+\item
+  \textbf{249--254} Margins of Sun and Earth, disk fraction, light
+  (margin \textgreater{} 0), useful communication (Earth margin
+  \textgreater{} 0.5°).
+\item
+  \textbf{255--260} Per-cell yearly results:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{luce\_pct}: \% of time in light;
+  \item
+    \texttt{energia\_pct}: mean of disk fraction ×
+    dust;
+  \item
+    \texttt{comunicazione\_pct}: \% with a useful link;
+  \item
+    \texttt{luce\_e\_com\_pct}: \% with both at once
+    --- the key operational number;
+  \item
+    \texttt{buio\_max\_h}: longest continuous darkness;
+  \item
+    \texttt{senza\_com\_max\_h}: longest gap without a
+    link.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{dynamic-evolution-evoluzione_celle-264280-and-_bit_b64-283284}{%
+\subsection{\texorpdfstring{Dynamic evolution:
+\texttt{evoluzione\_celle} (264--280) and \texttt{\_bit\_b64}
+(283--284)}{Dynamic evolution: evoluzione\_celle (264--280) and \_bit\_b64 (283--284)}}\label{dynamic-evolution-evoluzione_celle-264280-and-_bit_b64-283284}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{269--270} Two boolean arrays of shape (n\_instants, n\_cells),
+  preallocated with zeros (\texttt{False}).
+\item
+  \textbf{271--279} Same block loop; each block fills its columns for
+  all instants (light, useful communication).
+\item
+  \textbf{283--284} \texttt{np.packbits} packs 8
+  booleans per byte, then base64 for JSON. For NPA: 8761 instants × 1600
+  cells × 2 layers = 28 M bits ≈ 3.5 MB → 4.7 MB in base64.
+\end{itemize}
+
+\hypertarget{mappa_sito...-290379-the-driver-for-one-site}{%
+\subsection{\texorpdfstring{\texttt{mappa\_sito(...)} (290--379) --- the
+driver for one
+site}{mappa\_sito(...) (290--379) --- the driver for one site}}\label{mappa_sito...-290379-the-driver-for-one-site}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{294} Near terrain from the CSV
+  (\texttt{--celle}) or the 5 m DEM
+  (\texttt{--dem}).
+\item
+  \textbf{297--299} Regional DEM read only in a window extending 205 km
+  beyond the site.
+\item
+  \textbf{302--305} Grid of cell centres (default 500 m) inside the site
+  DEM, rows from top (y max) to bottom.
+\item
+  \textbf{306--308} Cell centres → lunar lon/lat.
+\item
+  \textbf{311} Horizons for all cells.
+\item
+  \textbf{314--316} Default start 2027-01-01; Sun/Earth vectors; static
+  metrics.
+\item
+  \textbf{319--332} If \texttt{passo\_evoluzione}
+  \textgreater{} 0: vectors again at that step, evolution, and its JSON
+  header (format, start, step, grid shape, bit ordering: \emph{instant,
+  row, column}).
+\item
+  \textbf{336--346} Slope from the CSV aggregated onto the 500 m cells:
+  each 100 m cell is assigned to its 500 m cell
+  (\texttt{np.add.at} sums and counts), giving mean
+  slope and mean \% area ≤ 10°.
+\item
+  \textbf{347} A 500 m cell is \textbf{landable} if on average ≥ 50 \%
+  of its area has slope ≤ 10°.
+\item
+  \textbf{348} Best cells (below).
+\item
+  \textbf{350--379} Output dictionary: grid, period, assumptions and
+  layers (lat, lon, elevation, max horizon, all metrics, slope). Keys
+  starting with \texttt{\_} (evolution, raw horizons)
+  are kept out of the map JSON.
+\end{itemize}
+
+\hypertarget{migliori_celle-382402}{%
+\subsection{\texorpdfstring{\texttt{\_migliori\_celle}
+(382--402)}{\_migliori\_celle (382--402)}}\label{migliori_celle-382402}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{385--386} Score = light + communication \%, plus energy × $10^{-3}$
+  as a tie-breaker; non-landable cells get −∞.
+\item
+  \textbf{388--392} Greedy choice of the top 5 cells, each at least 1 km
+  from the ones already chosen, so the list isn't five neighbours of the
+  same spot.
+\item
+  \textbf{393--402} Coordinates, elevation, metrics and slope of each.
+\end{itemize}
+
+\hypertarget{saving-and-plotting-405480}{%
+\subsection{Saving and plotting
+(405--480)}\label{saving-and-plotting-405480}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{405--412} \texttt{\_json\_pulito}: NaN/inf →
+  \texttt{null} (valid JSON) and drops private
+  \texttt{\_} keys.
+\item
+  \textbf{415--425} \texttt{salva}: writes
+  \texttt{mappa\_<name>.json}, the PNG and
+  \texttt{evoluzione\_<name>.json}.
+\item
+  \textbf{428--480} \texttt{disegna}: 2 × 4 panels ---
+  elevation, mean slope, light \%, communication \%, light +
+  communication \%, energy \%, longest darkness, and light +
+  communication restricted to landable cells; best cells as cyan
+  circles, user points as stars.
+\end{itemize}
+
+\hypertarget{confronta_con_terreno-483497}{%
+\subsection{\texorpdfstring{\texttt{confronta\_con\_terreno}
+(483--497)}{confronta\_con\_terreno (483--497)}}\label{confronta_con_terreno-483497}}
+
+Recomputes this module's horizon at the point of a topography
+\texttt{horizon.json} and prints mean, mean absolute
+and max difference --- a cross-check between the two independent horizon
+implementations (\texttt{--confronta}).
+
+\hypertarget{command-line-500539}{%
+\subsection{Command line (500--539)}\label{command-line-500539}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{--dem} or \texttt{--celle}
+  (one is required), \texttt{--far},
+  \texttt{--nome}, \texttt{--passo}
+  (500 m), \texttt{--inizio} (2027-01-01),
+  \texttt{--giorni} (365),
+  \texttt{--passo-tempo} (60 min),
+  \texttt{--uscita},
+  \texttt{--passo-evoluzione} (360 min; 0 = none),
+  \texttt{--confronta},
+  \texttt{--segna "lat,lon,name"} (repeatable).
+\item
+  \textbf{520--526} Marked points converted to map x/y.
+\item
+  \textbf{529--537} Run, save, print the best landable cells;
+  \textbf{538--539} optional horizon comparison.
+\end{itemize}
+
+\hypertarget{web-app-support-tabella_sole_terra.py-and-tabella_sole_terra.js}{%
+\section{\texorpdfstring{Web-app support:
+\texttt{tabella\_sole\_terra.py} and
+\texttt{tabella\_sole\_terra.js}}{Web-app support: tabella\_sole\_terra.py and tabella\_sole\_terra.js}}\label{web-app-support-tabella_sole_terra.py-and-tabella_sole_terra.js}}
+
+\hypertarget{tabella_sole_terra.py-67-lines}{%
+\subsection{\texorpdfstring{\texttt{tabella\_sole\_terra.py} (67
+lines)}{tabella\_sole\_terra.py (67 lines)}}\label{tabella_sole_terra.py-67-lines}}
+
+The web app cannot run Skyfield, so the expensive part is pre-computed
+once.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{26--31} \texttt{sottopunto(v)}: a body vector
+  (km, Moon frame) → latitude, longitude and distance of the point on
+  the Moon that has that body at the zenith (sub-solar / sub-Earth
+  point).
+\item
+  \textbf{34--52} \texttt{genera}: hourly Sun/Earth
+  vectors from \texttt{mappatura.vettori\_sole\_terra},
+  converted to sub-points. Rounded to $10^{-4}$° (\textasciitilde3 m on the
+  Moon) and to 100 km (Sun) / 1 km (Earth) to keep the file small.
+\item
+  \textbf{55--67} CLI: default 2026-01-01 for 3 years, every hour → 26
+  305 instants.
+\end{itemize}
+
+\hypertarget{tabella_sole_terra.js-69-lines}{%
+\subsection{\texorpdfstring{\texttt{tabella\_sole\_terra.js} (69
+lines)}{tabella\_sole\_terra.js (69 lines)}}\label{tabella_sole_terra.js-69-lines}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{caricaTabella(url)}: loads the JSON and
+  pre-computes start time and step in ms.
+\item
+  \texttt{\_vett}: sub-point (lat, lon, distance) →
+  vector in the Moon frame.
+\item
+  \texttt{\_interp}: finds the two hourly rows around
+  the requested time and interpolates the \textbf{vectors} linearly
+  (better than interpolating longitudes, which would break at ±180°).
+  Throws an error outside the table's range.
+\item
+  \texttt{\_elevAz}: exactly the maths of
+  \texttt{elev\_az} in
+  \texttt{mappatura.py} --- site position from
+  lat/lon/elevation, parallax, elevation and azimuth from the local
+  up/east/north vectors.
+\item
+  \texttt{soleTerra(T, lat, lon, quota, date)}: Sun and
+  Earth elevation/azimuth plus the Sun's apparent radius.
+\item
+  \texttt{sopraOrizzonte(corpo, orizzonte, margine)}:
+  true if the body is above a 360-value horizon by more than a margin
+  (linear interpolation in azimuth).
+\end{itemize}
+
+\hypertarget{validation-test_luna.py-39-lines}{%
+\section{\texorpdfstring{Validation: \texttt{test\_luna.py} (39
+lines)}{Validation: test\_luna.py (39 lines)}}\label{validation-test_luna.py-39-lines}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{15--29} Loads the same kernels and builds
+  \texttt{MOON\_ME\_DE421}.
+\item
+  \textbf{32} Apollo 11 site: 0.674° N, 23.473° E.
+\item
+  \textbf{35} Landing time: 1969-07-20 20:17 UTC.
+\item
+  \textbf{37--39} Prints Sun and Earth elevation/azimuth.
+\item
+  Reference (Apollo Lunar Surface Journal): Sun 10.65° / 88.81°, Earth
+  \textasciitilde59.5° / 272.16°. Computed: Sun 10.7° / 88.8°, Earth
+  59.2° / 272.2°. The differences (≤ \textasciitilde0.5°) are of the
+  same size as those the ALSJ itself reports between different
+  ephemerides, and the site coordinates are only known to
+  \textasciitilde0.01°.
+\end{itemize}
+
+This checks the frame, time scale and kernel set end to end; it is
+printed, not asserted (no pass/fail threshold).
+
+\hypertarget{issues-found-in-the-ephemerides-code}{%
+\section{Issues found in the ephemerides
+code}\label{issues-found-in-the-ephemerides-code}}
+
+Overall the physics is right: true lunar orientation with librations,
+light time and aberration, parallax, partial solar disk, and a frame
+consistent with LOLA. The weak points are modelling scope and the
+coupling with the topography outputs.
+
+\hypertarget{affects-results}{%
+\subsection{Affects results}\label{affects-results}}
+
+\textbf{1. \texttt{mappatura.py} computes its own
+horizon from 100 m mean elevations, not from the topography
+\texttt{horizon.json}.}
+
+\begin{itemize}
+\tightlist
+\item
+  In \texttt{--celle} mode the near terrain is the 100
+  m cell-mean grid, sampled every 10 m. Small rims, boulders and slopes
+  inside a 100 m cell are averaged out, and the observer stands 2 m
+  above a 100 m mean, not above the real ground. The docstring itself
+  says the CSV mode is slightly optimistic.
+\item
+  On the positive side, this means the topography coordinate issue
+  (horizons at the DEM centre) does \textbf{not} affect the maps: each
+  500 m cell has its own horizon.
+\item
+  The two horizon codes differ (straight rays in the map plane vs
+  geodesics; 10/240 m steps vs 5/100 m).
+  \texttt{--confronta} exists to quantify this, but its
+  result isn't stored in the outputs.
+\end{itemize}
+
+\textbf{2. Lunar eclipses are not modelled.} Light only checks the
+terrain. When the Earth passes in front of the Sun (a lunar eclipse seen
+from Earth, \textasciitilde2 per year, up to \textasciitilde3--5 h each
+including penumbra), the Sun counts as visible and producing full power.
+For survival of the darkest period this matters: an eclipse can extend a
+dark period or occur while batteries are low.
+
+\textbf{3. Direct-to-Earth link = Earth above the terrain by 0.5°.}
+Ground-station visibility (DSN antennas rotating with the Earth),
+Earth's disk size (\textasciitilde0.95° radius) and link budget are not
+modelled. \texttt{comunicazione\_pct} is an upper bound
+on contact time.
+
+\textbf{4. Power model.} The panel always points at the Sun, so no
+cosine losses; the \textasciitilde±3.4 \% yearly solar-flux variation
+(Earth--Sun distance) and panel temperature are ignored.
+\texttt{energia\_pct} is a relative geometric index,
+not a power budget.
+
+\textbf{5. Missing terrain counts as no obstruction.}
+\texttt{orizzonte\_celle} line 162 replaces NaN angles
+with −90°. Unlike the topography pipeline, coverage is not reported per
+cell, so a gap in the far DEM silently makes a cell look better lit.
+
+\hypertarget{minor-or-cosmetic}{%
+\subsection{Minor or cosmetic}\label{minor-or-cosmetic}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{6. Straight rays in the projection plane.} The docstring
+  states \textless{} 0.4 \% scale error. With true scale at the pole the
+  scale factor is k = 1 + ρ²/(4R²); at ρ ≈ 290 km (a site
+  \textasciitilde90 km from the pole plus 200 km) k ≈ 1.007, so up to
+  \textasciitilde0.7 \% --- still small for horizon angles, but the
+  comment understates it.
+\item
+  \textbf{7. Duplicate ephemeris work.} With
+  \texttt{--passo-tempo 60 --passo-evoluzione 60} (the
+  command used) the Sun/Earth vectors and per-cell elevations are
+  computed twice at identical steps.
+\item
+  \textbf{8. \texttt{margine\_bordo} in
+  \texttt{mappa\_sito}} is never exposed on the command
+  line; \texttt{ipotesi} in the JSON hard-codes 2 m, 10
+  km and 200 km instead of reading the values actually used.
+\item
+  \textbf{9. \texttt{test\_luna.py} has no assertion.}
+  Turning the 0.5° comparison into an \texttt{assert}
+  would make it a real regression test.
+\item
+  \textbf{10. Event times in \texttt{effemeridi.py}}
+  come from linear interpolation of the margin; with the 60 min step
+  used for maps (vs 10 min default) errors grow to tens of minutes. The
+  maps don't use events, so this only affects
+  \texttt{valuta\_sito} with large steps.
+\item
+  \textbf{11. Dust risk thresholds} are team-chosen, and the code says
+  so; treat the label as qualitative.
+\item
+  \textbf{12. \texttt{riepilogo\_mappe.csv/json}} have
+  no generating script in the folder; how they were produced isn't
+  reproducible from the repository.
+\end{itemize}
+
+\hypertarget{verified-correct}{%
+\subsection{Verified correct}\label{verified-correct}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{MOON\_ME\_DE421} built from DE421 + PA
+  kernels: same frame and longitudes as LOLA.
+\item
+  Light time, aberration and parallax included; refraction correctly
+  absent.
+\item
+  Map-plane north = radial direction from the pole, east = 90°
+  clockwise; azimuth from north towards east everywhere (Python and JS).
+\item
+  Horizon interpolation wraps at 360°.
+\item
+  Solar disk fraction formula (circular segment) and its limits.
+\item
+  Vector (not angle) interpolation in the web table; same
+  elevation/azimuth maths in Python and JavaScript.
+\item
+  NaN → \texttt{null} in JSON; bit ordering of the
+  evolution file documented in the file itself.
+\end{itemize}
+
+\end{document}

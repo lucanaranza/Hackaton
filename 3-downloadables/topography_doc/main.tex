@@ -1,0 +1,1687 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{longtable,booktabs,array,calc}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{newunicodechar}
+
+% Unicode symbols used in the text (keeps the file pdfLaTeX-compatible)
+\newunicodechar{°}{\ensuremath{^\circ}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{²}{\ensuremath{^2}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{φ}{\ensuremath{\varphi}}
+\newunicodechar{₀}{\ensuremath{_0}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{∂}{\ensuremath{\partial}}
+\newunicodechar{∇}{\ensuremath{\nabla}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+
+\definecolor{codebg}{RGB}{246,247,249}
+\definecolor{codekw}{RGB}{0,82,155}
+\definecolor{codecm}{RGB}{110,120,110}
+\definecolor{codestr}{RGB}{163,21,21}
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecm}\itshape,
+  stringstyle=\color{codestr},
+  backgroundcolor=\color{codebg},
+  frame=single, rulecolor=\color{black!15},
+  breaklines=true, postbreak=\mbox{$\hookrightarrow$\space},
+  columns=fullflexible, keepspaces=true, showstringspaces=false,
+  xleftmargin=2pt, xrightmargin=2pt,
+  literate={°}{{$^\circ$}}1 {²}{{$^2$}}1 {−}{{-}}1 {×}{{$\times$}}1
+           {≤}{{$\leq$}}1 {≥}{{$\geq$}}1 {→}{{$\rightarrow$}}1 {·}{{$\cdot$}}1
+           {…}{{\ldots}}1 {–}{{--}}1 {—}{{---}}1 {“}{{``}}1 {”}{{''}}1
+}
+\lstset{literate={°}{{$^\circ$}}1 {²}{{$^2$}}1 {−}{{-}}1 {×}{{$\times$}}1
+           {≤}{{$\leq$}}1 {≥}{{$\geq$}}1 {→}{{$\rightarrow$}}1 {·}{{$\cdot$}}1
+           {…}{{\ldots}}1 {–}{{--}}1 {—}{{---}}1 {“}{{``}}1 {”}{{''}}1}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\sloppy
+\setlength{\parskip}{4pt}
+\hypersetup{colorlinks=true, linkcolor=codekw, urlcolor=codekw}
+
+\title{L.A.N.D.\ Topography\\[2pt]\large Documentation}
+\author{NASA Space Apps - Patos team - Luca Naranza}
+\date{19 November 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+The topography pipeline turns LOLA/PGDA polar DEMs into three things per
+candidate landing site: a 360° horizon profile, terrain statistics
+(slope, relief, coverage) and a grid of 100 × 100 m cells that the
+webapp heatmap consumes. Everything lives in
+\texttt{Hackaton\_Topography/scripts/}.
+
+\textbf{Data flow}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{download\_dem.py} fetches the large regional
+  mosaic (LDEM 60S, 240 m/px) with resumable HTTP Range requests.
+\item
+  \texttt{dem\_products.py} makes sure an elevation
+  raster is used even when someone points the code at a slope product
+  (\texttt{LDSM\_*}).
+\item
+  \texttt{site\_coordinates.py} validates the site
+  catalog (lat/lon per site) and runs a preflight before any
+  computation.
+\item
+  \texttt{analyze\_all.py} is the batch driver: for
+  each of the 27 site folders in
+  \texttt{dati\_siti\_topografia/} it launches
+  \texttt{script.py} as a subprocess, then
+  independently re-verifies the results and writes the summary tables.
+\item
+  \texttt{script.py} is the per-site worker: it calls
+  \texttt{horizon.py} for the horizon and computes
+  slope/aspect/cell statistics itself.
+\item
+  \texttt{finalize\_results.py} re-checks the whole
+  output tree and writes \texttt{verifica\_finale.json}
+  and the comparison chart.
+\end{enumerate}
+
+\textbf{Inputs per site} (5 m/px, polar stereographic, lunar sphere R =
+1 737 400 m):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Product
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+How it's used
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{*\_surf.tif} & Elevation (m) & Main input for
+horizon and slope \\
+\texttt{*\_slp.tif} & Slope (°) from PGDA & Only as a
+cross-check against the recomputed slope \\
+\texttt{*\_toterr.tif} & Vertical uncertainty (m) &
+Sanity range check \\
+\texttt{*\_ldec.tif} & Number of LOLA shots per pixel &
+0 means interpolated terrain, not missing data \\
+\end{longtable}
+
+\textbf{Outputs per site}
+(\texttt{risultati topografia/Sito\_*}):
+\texttt{horizon.json},
+\texttt{horizon\_local.json},
+\texttt{horizon.png},
+\texttt{summary.json},
+\texttt{site\_cells.csv},
+\texttt{validation.json},
+\texttt{README.md}, \texttt{run.log}.
+Global: \texttt{riepilogo.json/csv},
+\texttt{confronto*.png},
+\texttt{verifica\_finale.json}.
+
+\textbf{Example (Sito\_NPA, from its \texttt{run.log}
+and \texttt{summary.json}):} 4000 × 4000 px grid (20 ×
+20 km), no missing elevation, elevation −2612 to −1347 m, mean slope
+6.47°, 80.05 \% of the area ≤ 10°, horizon between 0.69° and 4.72°.
+
+Conventions used everywhere: azimuth 0° = geographic north, 90° = east;
+longitudes east-positive in {[}−180, 180); body-fixed frame
+MOON\_ME\_DE421; no atmospheric refraction (correct for the Moon).
+
+\hypertarget{getting-the-data-download_dem.py-and-dem_products.py}{%
+\section{\texorpdfstring{Getting the data: \texttt{download\_dem.py}
+and
+\texttt{dem\_products.py}}{Getting the data: download\_dem.py and dem\_products.py}}\label{getting-the-data-download_dem.py-and-dem_products.py}}
+
+\hypertarget{download_dem.py-62-lines}{%
+\subsection{\texorpdfstring{\texttt{download\_dem.py} (62
+lines)}{download\_dem.py (62 lines)}}\label{download_dem.py-62-lines}}
+
+A script with no functions at module level, run as
+\texttt{python download\_dem.py <url> <destination>}.
+It exists because the regional mosaic is several GB and a plain download
+that dies at 90 \% starts over.
+
+\begin{lstlisting}[language=Python]
+11  url, destination = sys.argv[1:3]
+12  path=Path(destination).resolve();path.parent.mkdir(parents=True,exist_ok=True)
+13  part=path.with_suffix(path.suffix+'.part');checkpoint=path.with_suffix(path.suffix+'.download.json')
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{11--13} Read the two CLI arguments, create the destination
+  folder, and define two sidecar files:
+  \texttt{X.tif.part} (the file being written) and
+  \texttt{X.tif.download.json} (which blocks are done).
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+14  with urllib.request.urlopen(urllib.request.Request(url,method='HEAD'),timeout=60) as response:
+15      total=int(response.headers['Content-Length']);modified=response.headers.get('Last-Modified')
+16  if path.exists():
+17      if path.stat().st_size != total:raise ValueError('File finale di dimensione inattesa')
+18      print('File gia completo:',path,flush=True);sys.exit(0)
+19  block=16*1024*1024
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{14--15} A \texttt{HEAD} request gets the
+  total size and \texttt{Last-Modified} without
+  downloading anything.
+\item
+  \textbf{16--18} If the final file already exists, it is accepted only
+  if its size matches exactly; otherwise the script stops instead of
+  overwriting.
+\item
+  \textbf{19} Work unit: 16 MiB blocks.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+20  if checkpoint.exists():
+21      state=json.loads(checkpoint.read_text());assert state['url']==url and state['total_bytes']==total
+22      completed=set(state['completed_blocks'])
+23  else:
+24      prefix=part.stat().st_size if part.exists() else 0
+25      assert prefix <= total
+26      completed=set(range(prefix//block))
+27      state={'url':url,'total_bytes':total,'last_modified':modified,'block_bytes':block}
+28      if shutil.disk_usage(path.parent).free < total-prefix+256*1024*1024:raise OSError('Spazio disco insufficiente')
+29      with part.open('ab') as target:target.truncate(total)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{20--22} Resume: if a checkpoint exists, it must refer to the
+  same URL and the same size, then the set of finished blocks is
+  reloaded.
+\item
+  \textbf{23--26} First run (or a \texttt{.part} from
+  an older sequential downloader): every full block already in the
+  prefix counts as done.
+\item
+  \textbf{28} Refuses to start without the missing bytes plus a 256 MiB
+  margin of free disk.
+\item
+  \textbf{29} \texttt{truncate(total)} preallocates the
+  \texttt{.part} to its final size, so blocks can be
+  written at any offset in any order.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+30  def persist():
+31      state['completed_blocks']=sorted(completed)
+32      temp=checkpoint.with_suffix(checkpoint.suffix+'.tmp')
+33      temp.write_text(json.dumps(state,indent=2),encoding='utf-8');temp.replace(checkpoint)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{30--33} Atomic checkpoint: write to
+  \texttt{.tmp}, then
+  \texttt{replace()}. A crash mid-write never leaves a
+  half-written JSON.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+35  def fetch(index):
+36      start=index*block;end=min(total,start+block)-1
+37      for attempt in range(4):
+38          try:
+39              request=urllib.request.Request(url,headers={'Range':f'bytes={start}-{end}'})
+40              with urllib.request.urlopen(request,timeout=120) as response:
+41                  assert response.status==206 and response.headers.get('Content-Range')==f'bytes {start}-{end}/{total}'
+42                  data=response.read(end-start+2)
+43                  assert len(data)==end-start+1,'Blocco incompleto'
+44              with part.open('r+b') as target:target.seek(start);target.write(data)
+45              return index
+46          except Exception:
+47              if attempt==3:raise
+48              time.sleep(attempt+1)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{36} Byte range of block \texttt{index}; the
+  last block is shorter.
+\item
+  \textbf{41} The key safety check: the server must answer
+  \texttt{206 Partial Content} with exactly the
+  requested range. A server that ignores \texttt{Range}
+  and returns \texttt{200} with the whole file would
+  otherwise corrupt the output silently.
+\item
+  \textbf{42--43} Reads one byte more than expected, so a too-long body
+  is detected as well as a short one.
+\item
+  \textbf{44} Each thread opens its own handle and writes at the block's
+  offset.
+\item
+  \textbf{37, 46--48} Up to 4 attempts with linear back-off (1, 2, 3 s);
+  the 4th failure propagates.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+49  indices=[i for i in range((total+block-1)//block) if i not in completed]
+52  with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+53      for future in concurrent.futures.as_completed([pool.submit(fetch,i) for i in indices]):
+54          completed.add(future.result());persist()
+55          done=sum(min(block,total-i*block) for i in completed)
+57  assert len(completed)==(total+block-1)//block
+58  part.replace(path)
+59  digest=hashlib.file_digest(path.open('rb'),'sha256').hexdigest()
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{49} Missing blocks = all blocks (ceiling division) minus the
+  done ones.
+\item
+  \textbf{52--56} 8 parallel downloads; the checkpoint is updated after
+  \textbf{every} finished block (from the main thread only, so no race
+  on the JSON). Progress is computed from the real size of each block.
+\item
+  \textbf{57--58} Only when every block is present does
+  \texttt{.part} become the final name.
+\item
+  \textbf{59--61} A SHA-256 of the result is stored in the checkpoint.
+  Note: it is \emph{recorded}, not \emph{compared} against a published
+  checksum. \texttt{hashlib.file\_digest} needs Python
+  ≥ 3.11.
+\end{itemize}
+
+\hypertarget{dem_products.py-35-lines}{%
+\subsection{\texorpdfstring{\texttt{dem\_products.py} (35
+lines)}{dem\_products.py (35 lines)}}\label{dem_products.py-35-lines}}
+
+One function, \texttt{resolve\_dem\_path(value)}. PGDA
+distributes a slope map \texttt{LDSM\_60S\_240MPP\_ADJ}
+next to the elevation map
+\texttt{LDEM\_60S\_240MPP\_ADJ}. The horizon needs
+\textbf{elevation}: a slope field cannot be integrated back to unique
+heights. This function makes the swap explicit and safe.
+
+\begin{lstlisting}[language=Python]
+13      path = Path(value)
+14      if not path.stem.upper().startswith('LDSM_'):
+15          return path
+16      match = re.fullmatch(r'LDSM_(\d+[NS])_(\d+MPP)_ADJ', path.stem, re.IGNORECASE)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{14--15} Anything that isn't an LDSM file is passed through
+  untouched.
+\item
+  \textbf{16} Extracts region (\texttt{60S}) and
+  resolution (\texttt{240MPP}).
+  \texttt{fullmatch} rejects related files such as
+  error maps.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+21      expected = f'LDEM_{match[1]}_{match[2]}_ADJ'.upper()
+22      matches = sorted({f.resolve() for f in path.parent.rglob('*')
+23          if f.is_file() and f.suffix.lower() in ('.tif', '.tiff') and f.stem.upper() == expected})
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{21--23} Builds the twin name and searches the LDSM's folder
+  \textbf{and its subfolders} (case-insensitive,
+  \texttt{.tif}/\texttt{.tiff}). In
+  this project it finds
+  \texttt{dati\_regionali/60S/LDEM\_60S\_240MPP\_ADJ.TIF},
+  as \texttt{run.log} shows.
+\item
+  \textbf{24--27} Zero matches or more than one is an error, never a
+  guess.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+29      with rasterio.open(path) as slope, rasterio.open(dem) as elevation:
+30          same_crs = (slope.crs is not None and elevation.crs is not None
+31                      and slope.crs.to_dict() == elevation.crs.to_dict())
+32          if (slope.count != 1 or elevation.count != 1 or slope.shape != elevation.shape
+33                  or not slope.transform.almost_equals(elevation.transform) or not same_crs):
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{29--34} Confirms the two files really are twins: one band
+  each, same pixel shape, same affine transform (within float
+  tolerance), same CRS. Only then is the LDEM path returned.
+\end{itemize}
+
+\hypertarget{the-horizon-engine-horizon.py-246-lines}{%
+\section{\texorpdfstring{The horizon engine: \texttt{horizon.py} (246
+lines)}{The horizon engine: horizon.py (246 lines)}}\label{the-horizon-engine-horizon.py-246-lines}}
+
+This is the physics core of the topography side. Its output
+(\texttt{horizon.json}) is the contract the ephemeris
+engine reads: for each integer azimuth 0--359°, the elevation angle
+above which the Sun or Earth is visible from the site.
+
+\hypertarget{constants-1415}{%
+\subsection{Constants (14--15)}\label{constants-1415}}
+
+\begin{lstlisting}[language=Python]
+14  RADIUS_M = 1_737_400.0
+15  LUNAR_CRS = CRS.from_proj4(f"+proj=longlat +R={RADIUS_M} +no_defs")
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{14} IAU mean lunar radius, the same sphere the PGDA products
+  are defined on.
+\item
+  \textbf{15} A geographic (lon/lat) CRS on that sphere. Every lon/lat
+  in the pipeline is expressed here; using EPSG:4326 (Earth WGS84) would
+  silently put the points in the wrong place.
+\end{itemize}
+
+\hypertarget{demsampler-reading-heights-at-arbitrary-lonlat-1882}{%
+\subsection{\texorpdfstring{\texttt{DEMSampler}: reading heights at
+arbitrary lon/lat
+(18--82)}{DEMSampler: reading heights at arbitrary lon/lat (18--82)}}\label{demsampler-reading-heights-at-arbitrary-lonlat-1882}}
+
+\begin{lstlisting}[language=Python]
+21      product_name = Path(source.name).stem.upper()
+22      unit = (source.units[0] or '').lower() if source.count else ''
+23      if product_name.startswith('LDSM_') or product_name.endswith('_SLP') or 'degree' in unit:
+24          raise ValueError(...)
+25      if source.count != 1 or source.crs is None:
+28      if not (np.isclose(crs.ellipsoid.semi_major_metre, RADIUS_M)
+29              and np.isclose(crs.ellipsoid.semi_minor_metre, RADIUS_M)):
+31      self.to_xy = Transformer.from_crs(LUNAR_CRS, crs, always_xy=True)
+32      self.data = self._read() if source.width * source.height <= 20_000_000 else None
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{21--24} Second line of defence against slope maps (after
+  \texttt{dem\_products.py}): file names
+  \texttt{LDSM\_*}, \texttt{*\_SLP},
+  or a band unit containing ``degree'' are refused.
+\item
+  \textbf{25--30} Exactly one band, a CRS present, and a spherical body
+  of radius 1 737 400 m (semi-major = semi-minor).
+\item
+  \textbf{31} Transformer lon/lat → projected x/y of this raster.
+  \texttt{always\_xy=True} fixes the argument order to
+  (lon, lat).
+\item
+  \textbf{32} Rasters up to 20 Mpx (the 4000×4000 site DEMs = 16 Mpx,
+  128 MB as float64) are loaded whole. Bigger ones (the regional mosaic)
+  use the tile cache below.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+36  def _read(self, window=None):
+38      data = src.read(1, window=window, masked=True).astype("float64").filled(np.nan)
+39      data = data * src.scales[0] + src.offsets[0]
+40      data[~np.isfinite(data)] = np.nan
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{38} Reads band 1 with NoData masked, converts to float64,
+  turns masked pixels into NaN.
+\item
+  \textbf{39} Applies the GeoTIFF scale/offset (raw integers → metres
+  when the file stores them that way).
+\item
+  \textbf{40} Any inf becomes NaN: from here on, NaN is the single
+  meaning of ``no data''.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+44      x, y = self.to_xy.transform(lon, lat)
+45      inverse = ~self.source.transform
+46      col = inverse.a*np.asarray(x) + inverse.b*np.asarray(y) + inverse.c
+47      row = inverse.d*np.asarray(x) + inverse.e*np.asarray(y) + inverse.f
+49      row, col = np.atleast_1d(row) - 0.5, np.atleast_1d(col) - 0.5
+51      inside = (np.isfinite(row) & np.isfinite(col) & (row >= 0) & (col >= 0)
+52                & (row <= self.source.height-1) & (col <= self.source.width-1))
+55          result[indices] = map_coordinates(self.data, [row[indices], col[indices]], order=1, ...)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{44} lon/lat → projected metres.
+\item
+  \textbf{45--47} The inverse affine transform turns metres into
+  fractional pixel coordinates, written out explicitly so it works on
+  whole arrays at once.
+\item
+  \textbf{49} The subtle line. Rasterio's (0,0) is the \emph{top-left
+  corner} of the first pixel;
+  \texttt{scipy.ndimage.map\_coordinates} treats
+  integer indices as pixel \emph{centres}. Subtracting 0.5 aligns them.
+  Without it every sample would be shifted by half a pixel (2.5 m
+  locally, 120 m on the 240 m mosaic).
+\item
+  \textbf{51--52} Only points whose 2×2 bilinear neighbourhood is inside
+  the raster are sampled; the rest stay NaN. Points in the outer
+  half-pixel are therefore treated as outside.
+\item
+  \textbf{55} \texttt{order=1} = bilinear
+  interpolation, \texttt{prefilter=False} because no
+  spline is used. A NaN neighbour makes the result NaN, so no-data never
+  leaks in as a number.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+61          tile_h, tile_w = self.source.block_shapes[0]
+62          if tile_h == 1:
+63              tile_h = 256
+65          keys = (row[indices].astype(int)//tile_h)*ncols + col[indices].astype(int)//tile_w
+66          for key in np.unique(keys):
+71                  height = min(tile_h+1, self.source.height-r0)
+72                  width = min(tile_w+1, self.source.width-c0)
+76                  while self._cache_bytes > 64*1024*1024 and len(self._tiles)>1:
+77                      _, removed = self._tiles.popitem(last=False)
+79              self._tiles.move_to_end(cache_key)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{61--63} Uses the file's internal tiling. Striped TIFFs (1-row
+  blocks) get 256-row bands instead.
+\item
+  \textbf{65--66} Each sample is assigned to its tile; samples are
+  processed tile by tile. The comment on 58--60 explains why: a ray 200
+  km long crosses the raster diagonally, and one bounding window around
+  it would read millions of useless pixels.
+\item
+  \textbf{71--72} Tiles are read with \textbf{one extra row and column},
+  so the bilinear neighbour of a sample on the last row/column of the
+  tile is present.
+\item
+  \textbf{76--79} LRU cache capped at 64 MiB: the oldest tile is evicted
+  first, and a tile that is used again moves to the end. Rays from
+  neighbouring azimuths reuse the same tiles near the site, so most
+  reads hit the cache.
+\end{itemize}
+
+\hypertarget{elevation_angles-8589}{%
+\subsection{\texorpdfstring{\texttt{elevation\_angles}
+(85--89)}{elevation\_angles (85--89)}}\label{elevation_angles-8589}}
+
+\begin{lstlisting}[language=Python]
+87      d = np.asarray(distances_m, dtype=float)
+88      return np.degrees(np.arctan2(
+89          np.asarray(heights) - ground_m - observer_height_m - d*d/(2*RADIUS_M), d))
+\end{lstlisting}
+
+For a terrain point at surface distance \emph{d} with height \emph{h},
+the apparent elevation seen from an eye at
+\texttt{ground + observer\_height} is
+
+\begin{quote}
+e = atan( (h − h₀ − h\_obs − d²/2R) / d )
+\end{quote}
+
+The term \textbf{d²/2R} is how far the sphere curves away below the
+local horizontal plane: 288 m at 10 km, 11.5 km at 200 km. This is why
+distant terrain must be very high to matter. It is the small-angle
+version of the exact spherical geometry. I checked the leftover error:
+it is of order h·θ²/2 (about 13 m at 200 km for h ≈ −2 km), or about
+0.004°, which is negligible. \texttt{arctan2} keeps the
+sign right for points below the horizontal.
+
+\hypertarget{calculate_horizon-92206}{%
+\subsection{\texorpdfstring{\texttt{calculate\_horizon}
+(92--206)}{calculate\_horizon (92--206)}}\label{calculate_horizon-92206}}
+
+\textbf{Validation (102--121)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{102--103} lat/lon are mandatory. The DEM centre is
+  deliberately \emph{not} used as a fallback (see Issues: this is why
+  the current catalog blocks the run).
+\item
+  \textbf{104--110} Steps and distances must be positive and finite,
+  with step ≤ near distance ≤ max distance; observer height ≥ 0.
+\item
+  \textbf{111--112} Redundant: lines 102--103 already reject a missing
+  lat or lon.
+\item
+  \textbf{113--117} Remembers what was \emph{requested}, then maps every
+  LDSM path to its LDEM.
+\item
+  \textbf{120--121} \texttt{describe\_site} (from
+  \texttt{site\_coordinates.py}) checks that the point
+  lies inside the near DEM and normalises lat/lon.
+\end{itemize}
+
+\textbf{Opening the sources (122--136)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{122--127} \texttt{ExitStack} keeps every
+  raster open for the whole loop and closes them all even on error.
+  Source order is: near DEM (index 0), far DEM (1), fallbacks (2\ldots).
+\item
+  \textbf{129--136} Writes a provenance record for each source (file,
+  shape, resolution, scale/offset, bounds) into the metadata.
+\end{itemize}
+
+\textbf{Ground height and sample distances (137--145)}
+
+\begin{lstlisting}[language=Python]
+139      ground = float(near.sample([lon], [lat])[0])
+142      distances = np.append(np.arange(step_m, near_distance_m, step_m), near_distance_m)
+144          distances = np.concatenate((distances,
+145              np.arange(near_distance_m+far_step_m, max_distance_m, far_step_m), [max_distance_m]))
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{137--138} Excludes the exact poles, where ``north'' is
+  undefined.
+\item
+  \textbf{139} Ground height under the observer, sampled bilinearly from
+  the 5 m DEM.
+\item
+  \textbf{142} Near samples: 5, 10, \ldots, 9995, 10000 m (2000
+  samples).
+\item
+  \textbf{144--145} Far samples: 10 100 \ldots{} 200 000 m every 100 m
+  (1900 samples). In total there are 3900 samples per azimuth × 360 ≈
+  1.4 M height lookups per site.
+\end{itemize}
+
+\textbf{The ray loop (146--181)}
+
+\begin{lstlisting}[language=Python]
+146      geod = Geod(a=RADIUS_M, b=RADIUS_M)
+150          lons, lats, _ = geod.fwd(np.full(distances.size, lon), np.full(distances.size, lat),
+151                                    np.full(distances.size, az), distances)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{146, 150--151} For azimuth \texttt{az},
+  \texttt{Geod.fwd} walks along the \emph{great circle}
+  starting at the site with true geographic bearing
+  \texttt{az}, and returns lon/lat at every distance.
+  This is what makes azimuth 0 = geographic north, not grid north. That
+  matters at −87°, where the stereographic grid axes are rotated by up
+  to tens of degrees relative to the meridians.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+154          local = distances <= near_distance_m
+155          heights[local] = near.sample(lons[local], lats[local])
+156          source_index[np.isfinite(heights)] = 0
+157          local_angles = elevation_angles(heights, ground, observer_height_m, distances)
+158          local_horizon.append(float(np.nanmax(local_angles)) ...)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{154--156} First pass: only the 5 m DEM, only out to 10 km.
+  Each sample is tagged with source 0.
+\item
+  \textbf{157--158} The \textbf{local-only horizon} is computed now,
+  before far terrain is added. It is saved separately
+  (\texttt{orizzonte\_locale}) so you can see how much
+  the 200 km terrain adds.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+159          for index, sampler in enumerate(regional, 1):
+160              missing = ~np.isfinite(heights)
+163              samples = sampler.sample(lons[missing], lats[missing])
+165              heights[positions] = samples
+166              source_index[positions[np.isfinite(samples)]] = index
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{159--166} Each regional source fills \textbf{only} samples
+  that are still NaN, in priority order. The 240 m mosaic therefore
+  never overwrites 5 m data, and everything beyond 10 km comes from it.
+  Gaps that no source covers stay NaN: they are never set to 0 m, which
+  would invent a flat plain.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+170          angles = elevation_angles(heights, ground, observer_height_m, distances)
+171          winner = int(np.nanargmax(angles))
+172          horizons.append(float(angles[winner]))
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{170--172} The horizon at this azimuth is the \textbf{maximum
+  elevation angle over all samples}: the highest terrain silhouette
+  along the ray. \texttt{winner} remembers which sample
+  it was.
+\item
+  \textbf{173--179} Coverage record per azimuth: valid/total samples,
+  count per source, furthest valid distance, and whether coverage is
+  complete.
+\item
+  \textbf{180--181} Obstruction record: distance, height and source of
+  the point that sets the horizon. This is how you can tell whether a
+  site's horizon is set by a nearby crater rim or a massif 150 km away.
+\end{itemize}
+
+\textbf{Result (182--206)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{182--189} Coverage counts as complete only if a far DEM exists
+  \textbf{and} every azimuth has every sample. Warnings: no far DEM,
+  incomplete coverage (horizon possibly underestimated), fallback used.
+\item
+  \textbf{190--206} The JSON contract: \texttt{lat},
+  \texttt{lon},
+  \texttt{orizzonte[360]},
+  \texttt{orizzonte\_locale[360]}, and the metadata.
+  The metadata include frame MOON\_ME\_DE421, the azimuth convention,
+  the curvature model, and the explicit caveat that complete sample
+  coverage does not guarantee every feature between samples was caught.
+\end{itemize}
+
+\hypertarget{plot_horizon-208241}{%
+\subsection{\texorpdfstring{\texttt{plot\_horizon}
+(208--241)}{plot\_horizon (208--241)}}\label{plot_horizon-208241}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{215--219} Reads the DEM decimated to about 1000 px on its
+  longest side, averaging pixels
+  (\texttt{Resampling.average}) so the overview image
+  doesn't alias.
+\item
+  \textbf{220--226} Left panel: elevation map with the site (red +) and
+  the DEM centre (grey ×). When the two coincide, as in the current
+  results, that is visible here.
+\item
+  \textbf{231--233} Right panel: horizon versus azimuth, the near-only
+  profile dashed and the full profile solid. Each array is extended by
+  its first value (\texttt{[:1]}) so the curve closes
+  at 360°.
+\end{itemize}
+
+\hypertarget{the-per-site-worker-script.py-277-lines}{%
+\section{\texorpdfstring{The per-site worker: \texttt{script.py} (277
+lines)}{The per-site worker: script.py (277 lines)}}\label{the-per-site-worker-script.py-277-lines}}
+
+One script with two jobs, chosen by \texttt{--mode}:
+\texttt{horizon} (calls
+\texttt{horizon.py}), \texttt{metrics}
+(slope, cells, summary) or \texttt{all}.
+\texttt{analyze\_all.py} always runs it with
+\texttt{--mode all --no-rasters}.
+
+\hypertarget{statisticsvalues-2333}{%
+\subsection{\texorpdfstring{\texttt{statistics(values)}
+(23--33)}{statistics(values) (23--33)}}\label{statisticsvalues-2333}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{24} Drops NaN/inf first, so every statistic describes only
+  valid pixels.
+\item
+  \textbf{25--26} An empty array returns \texttt{None},
+  not a fake 0.
+\item
+  \textbf{27--33} count, min, max, mean, std (accumulated in float64
+  even when the input is float32, which avoids rounding drift over 16 M
+  pixels), and the 5th/50th/95th percentiles.
+\end{itemize}
+
+\hypertarget{terrain_derivativeselevation-dx-dy-3655}{%
+\subsection{\texorpdfstring{\texttt{terrain\_derivatives(elevation,\ dx,\ dy)}
+(36--55)}{terrain\_derivatives(elevation, dx, dy) (36--55)}}\label{terrain_derivativeselevation-dx-dy-3655}}
+
+\begin{lstlisting}[language=Python]
+42      dz_south, dz_east = np.gradient(elevation, dy, dx)
+43      dz_north = -dz_south
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{42} \texttt{np.gradient} returns one
+  derivative per array axis. Axis 0 is the row index, which grows
+  \textbf{downwards = southwards} on a north-up grid, so the first
+  output is ∂z/∂(south); axis 1 grows eastwards. In the interior it uses
+  central differences: (z{[}i+1{]} − z{[}i−1{]}) / 2·dy. The slope is
+  therefore measured over a \textbf{10 m baseline} at 5 m/px.
+\item
+  \textbf{43} Flips the sign to get ∂z/∂(north).
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+44      valid = np.isfinite(elevation)
+46      stencil[1:-1, 1:-1] = (
+47          valid[1:-1, 1:-1] & valid[:-2, 1:-1] & valid[2:, 1:-1]
+48          & valid[1:-1, :-2] & valid[1:-1, 2:]
+49      )
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{44--49} A pixel is trusted only if it and its four neighbours
+  (N, S, E, W) all have data. Edge pixels are always excluded, because
+  \texttt{np.gradient} falls back to one-sided
+  differences there. This is why NPA has 15 984 004 slope values =
+  3998², not 4000².
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+50      magnitude = np.hypot(dz_east, dz_north)
+51      slope = np.degrees(np.arctan(magnitude))
+52      aspect = np.degrees(np.arctan2(-dz_east, -dz_north)) % 360
+54      aspect[~stencil | (magnitude < 1e-7)] = np.nan
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{50--51} Slope = atan(\textbar∇z\textbar), the steepest-descent
+  angle, in degrees.
+\item
+  \textbf{52} Aspect = compass direction of the \textbf{downhill} vector
+  (−∇z): \texttt{atan2(east, north)} gives a bearing
+  clockwise from north, and \texttt{\% 360} maps it
+  into {[}0, 360). Measured from \textbf{grid} north, not geographic
+  north (stated in the docstring and in
+  \texttt{summary.json}).
+\item
+  \textbf{53--54} Untrusted pixels become NaN. Aspect is also NaN on
+  flat ground (\textbar∇z\textbar{} \textless{} 1e-7), where the
+  direction is meaningless.
+\end{itemize}
+
+\hypertarget{lunar_lonlat-5861}{%
+\subsection{\texorpdfstring{\texttt{lunar\_lonlat}
+(58--61)}{lunar\_lonlat (58--61)}}\label{lunar_lonlat-5861}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{60--61} Converts projected x/y to lon/lat on the lunar sphere.
+  The comment explains why: rasterio would happily transform to
+  EPSG:4326, which is Earth's ellipsoid.
+\end{itemize}
+
+\hypertarget{analyze...-64195}{%
+\subsection{\texorpdfstring{\texttt{analyze(...)}
+(64--195)}{analyze(...) (64--195)}}\label{analyze...-64195}}
+
+\textbf{Setup and checks (65--91)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{65--68} Resolves LDSM→LDEM. If lat/lon were given,
+  \texttt{describe\_site} returns the site's pixel and
+  position, and the coordinate source is recorded.
+\item
+  \textbf{71--76} One band, projected CRS in metres, lunar sphere. Line
+  75 tests the radius with
+  \texttt{to\_dict().get("R") != 1737400}, an exact
+  match on a proj4 key. \texttt{horizon.py} does the
+  same check more robustly with \texttt{np.isclose} on
+  the ellipsoid (see Issues).
+\item
+  \textbf{78--79} The affine must have no rotation terms
+  (\texttt{b = d = 0}), positive x step and negative y
+  step: north-up. The north/south derivative naming in
+  \texttt{terrain\_derivatives} depends on this.
+\item
+  \textbf{81--84} Reads the elevation as float32 (64 MB for 16 Mpx),
+  applies scale and offset, and turns NoData into NaN.
+\item
+  \textbf{85} Slope and aspect for the whole grid.
+\item
+  \textbf{89} Cell size in pixels:
+  \texttt{round(100/5) = 20} → 20 × 20 px cells.
+  \texttt{round} means a tile size that isn't a
+  multiple of the pixel is snapped; the actual size is reported as
+  \texttt{tile\_size\_actual\_m}.
+\end{itemize}
+
+\textbf{Optional rasters (94--116)}, skipped in batch runs by
+\texttt{--no-rasters}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{95--108} \texttt{terrain\_metrics.tif}: 3
+  float32 bands (elevation, slope, grid aspect), deflate compression,
+  floating-point predictor, with band names and units.
+\item
+  \textbf{110--116} \texttt{slope\_filter.tif}: uint8
+  with 1 = slope ≤ threshold, 0 = steeper, 255 = unknown.
+\end{itemize}
+
+\textbf{The 100 m cell loop (118--148)}
+
+\begin{lstlisting}[language=Python]
+119      for row in range(0, src.height, tile_rows):
+120          for col in range(0, src.width, tile_cols):
+121              end_row, end_col = min(row + tile_rows, src.height), min(col + tile_cols, src.width)
+124              zv, sv = z[np.isfinite(z)], s[np.isfinite(s)]
+125              if not zv.size:
+126                  continue
+127              x, y = affine * ((col + end_col) / 2, (row + end_row) / 2)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{119--121} Walks the grid in 20 × 20 px steps. Cells at the
+  edge are clipped (none occur here, since 4000 / 20 = 200).
+\item
+  \textbf{125--126} Cells with no elevation at all are dropped from the
+  CSV.
+\item
+  \textbf{127} Cell centre in projected metres. The pixel indices are
+  corner-based, so (col + end\_col)/2 is exactly the geometric centre.
+\end{itemize}
+
+Fields written per cell (128--140):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Field
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Formula
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Note
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{elevation\_coverage\_pct} & valid z / all
+pixels & \\
+\texttt{slope\_coverage\_pct} & valid slope / all
+pixels & Cells on the DEM border are \textless{} 100 \% \\
+\texttt{elevation\_mean\_m} & mean of valid z & \\
+\texttt{relief\_m} & max − min
+(\texttt{np.ptp}) & Includes any regional tilt; not
+roughness \\
+\texttt{slope\_mean\_deg},
+\texttt{slope\_max\_deg} & over valid slope & \\
+\texttt{passes\_slope\_filter\_pct} & count(s ≤ 10°) /
+\textbf{all} pixels & NaN compares False, so missing data counts as
+``fail'' \\
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{141--148} Converts all centres to lunar lon/lat in a single
+  call and writes \texttt{site\_cells.csv}. This is the
+  file the webapp heatmap loads.
+\end{itemize}
+
+\textbf{Site and summary (150--195)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{150--154} When a site is given: slope and aspect at the site's
+  own pixel, plus the record of the 100 m cell that contains it. That
+  cell is found by snapping the pixel's row/col down to a multiple of
+  20.
+\item
+  \textbf{155--156} DEM centre in x/y and lon/lat. For NPA that is x =
+  −88 500 m, y = 29 500 m → −86.924°, −71.565°.
+\item
+  \textbf{157} Fixed thresholds 5/10/15/20° plus the user's own,
+  deduplicated and sorted.
+\item
+  \textbf{168--171} Areas are pixel counts × 25 m². These are
+  \emph{projected} areas; see Issues for the stereographic scale.
+\item
+  \textbf{173--177} For each threshold: area at or below it, and
+  percentage of valid-slope pixels. For NPA ≤ 10° that is 319.9 km² =
+  80.05 \%. Unlike the per-cell \%, this denominator excludes NaN.
+\item
+  \textbf{180--183}
+  \texttt{top\_cells\_by\_slope\_only}: only fully
+  covered cells, sorted by pass \% (descending), then max slope, then
+  relief (ascending), keeping the top 10. The name is honest: it is a
+  slope ranking, not a landing score.
+\item
+  \textbf{184--192} The limitations list written into every summary.
+\item
+  \textbf{194} \texttt{allow\_nan=False}: if a NaN ever
+  slipped into the summary, the write would fail instead of producing
+  invalid JSON.
+\end{itemize}
+
+\hypertarget{main-198268}{%
+\subsection{\texorpdfstring{\texttt{main()}
+(198--268)}{main() (198--268)}}\label{main-198268}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{199--221} CLI. Defaults point to Site01 and
+  \texttt{risultati topografia/Sito\_01}; every horizon
+  parameter is exposed (\texttt{--observer-height},
+  \texttt{--near-distance},
+  \texttt{--step}, \texttt{--far-dem},
+  \texttt{--max-distance},
+  \texttt{--far-step},
+  \texttt{--fallback-dem} repeatable).
+\item
+  \textbf{222--223} Horizon and all modes refuse to run without
+  \texttt{--lat} and \texttt{--lon}.
+\item
+  \textbf{224--237} \texttt{resolved()} maps LDSM→LDEM
+  for each DEM argument and records every substitution. That record
+  produces the \texttt{LDSM -> LDEM:} line in
+  \texttt{run.log} and the
+  \texttt{prodotti\_risolti} metadata.
+\item
+  \textbf{238--244} Files must exist, 0 ≤ max slope \textless{} 90, tile
+  size \textgreater{} 0.
+\item
+  \textbf{245--262} Horizon: compute, attach the product mapping and
+  coordinate source, write \texttt{horizon.json}
+  (strict JSON), plot, print min/max (NPA: 0.694--4.721°) and any
+  warnings.
+\item
+  \textbf{263--267} Metrics: \texttt{analyze()}, then
+  print the key part of the summary. That printout is what appears in
+  \texttt{run.log}.
+\end{itemize}
+
+Note: the NPA \texttt{summary.json} currently on disk
+has \textbf{no \texttt{site} key}. It was produced by
+an earlier version that used the DEM centre, before the
+explicit-coordinate logic was added (see Issues).
+
+\hypertarget{orchestration-and-verification-site_coordinates.py-analyze_all.py-finalize_results.py}{%
+\section[Orchestration and verification]{\texorpdfstring{Orchestration and verification:
+\texttt{site\_coordinates.py}, \texttt{analyze\_all.py},
+\texttt{finalize\_results.py}}{Orchestration and verification: site\_coordinates.py, analyze\_all.py, finalize\_results.py}}\label{orchestration-and-verification-site_coordinates.py-analyze_all.py-finalize_results.py}}
+
+\hypertarget{site_coordinates.py-175-lines}{%
+\subsection{\texorpdfstring{\texttt{site\_coordinates.py} (175
+lines)}{site\_coordinates.py (175 lines)}}\label{site_coordinates.py-175-lines}}
+
+This module keeps two things that are easy to confuse apart:
+\textbf{where the site is} (the catalog) and \textbf{where the DEM tile
+is centred}.
+
+\textbf{\texttt{checked\_coordinates} (20--25)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{21--22} Rejects anything non-numeric, \emph{including
+  booleans}: in Python \texttt{True} is an
+  \texttt{int}, so \texttt{lat: true}
+  in JSON would otherwise pass as 1°.
+\item
+  \textbf{23} lat strictly inside (−90, 90); lon accepted in {[}−180,
+  360{]} so that both conventions work.
+\item
+  \textbf{25} \texttt{(lon+180)\%360-180} wraps to
+  {[}−180, 180): 350° → −10°.
+\end{itemize}
+
+\textbf{\texttt{dem\_geometry} (28--42)}: same CRS
+checks as \texttt{horizon.py}
+(\texttt{np.isclose} on the ellipsoid). Then the centre
+of the raster (\texttt{width/2, height/2} through the
+affine transform) is converted to lunar lon/lat. Used for reporting
+only.
+
+\textbf{\texttt{describe\_site(dem, lat, lon)}
+(45--77)}, called by \texttt{horizon.py},
+\texttt{script.py} and
+\texttt{analyze\_all.py}:
+
+\begin{lstlisting}[language=Python]
+51          x,y=to_xy.transform(lon,lat)
+54          row,col=src.index(x,y)
+58          c=inv.a*x+inv.b*y+inv.c-.5
+59          r=inv.d*x+inv.e*y+inv.f-.5
+60          if not (0<=r<=src.height-1 and 0<=c<=src.width-1) or min(src.shape)<2:
+62          ri,ci=min(math.floor(r),src.height-2),min(math.floor(c),src.width-2)
+63          wr,wc=r-ri,c-ci
+64          patch=src.read(1,window=Window(ci,ri,2,2),masked=True)...
+68          ground=float((1-wr)*(1-wc)*patch[0,0]+wr*(1-wc)*patch[1,0]+(1-wr)*wc*patch[0,1]+wr*wc*patch[1,1])
+70      _,_,distance=Geod(a=RADIUS_M,b=RADIUS_M).inv(geometry['dem_center_lon'],geometry['dem_center_lat'],lon,lat)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{51, 54--56} Projects to x/y, finds the containing pixel
+  (\texttt{src.index} floors), and refuses points
+  outside the DEM.
+\item
+  \textbf{58--61} Centre-based fractional pixel coordinates (the same
+  −0.5 convention as \texttt{DEMSampler}). A site in
+  the outer half-pixel ring is refused, because it has no full 2×2
+  neighbourhood.
+\item
+  \textbf{62--68} Reads exactly the 2×2 patch and does bilinear
+  interpolation \textbf{by hand}. Weight \texttt{wr}
+  goes to the lower row (\texttt{patch[1,…]}) and
+  \texttt{wc} to the right column. The
+  \texttt{min(…, height-2)} clamp handles a point lying
+  exactly on the last centre row/column. This value must agree with
+  \texttt{DEMSampler.sample} to 1e-6 m (checked in
+  \texttt{verify}), so two independent implementations
+  cross-check each other.
+\item
+  \textbf{70} Geodesic distance from the DEM centre to the site: the
+  number that shows whether the analysis point is the tile centre or a
+  real chosen site.
+\end{itemize}
+
+\textbf{\texttt{load\_catalog} (80--94)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{82} \texttt{utf-8-sig} tolerates a BOM, which
+  Windows Notepad adds.
+\item
+  \textbf{83--84} The catalog must declare frame MOON\_ME\_DE421, units
+  degree, east-positive longitude. This makes the reference frame a
+  deliberate statement rather than an assumption.
+\item
+  \textbf{88--93} Every entry needs a non-empty
+  \texttt{site\_id}; IDs are matched case-insensitively
+  and duplicates are an error.
+\item
+  \textbf{94} Returns the entries plus the SHA-256 of the catalog file.
+  The hash is written into every output, so each result can be traced to
+  the exact coordinate file that produced it.
+\end{itemize}
+
+\textbf{\texttt{find\_dem} (97--100)}: exactly one
+\texttt{*\_surf.tif} per site folder.
+
+\textbf{\texttt{create\_template} (103--111)}: writes a
+catalog with every site folder and
+\texttt{lat/lon/source = null}. It \textbf{never
+overwrites} an existing file (105). This is the state the repository is
+in now.
+
+\textbf{\texttt{preflight} (114--160)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{118--139} Per folder: find the DEM, compute the DEM centre,
+  look up the catalog entry, validate lat/lon, require a non-empty
+  \texttt{source}, then run
+  \texttt{describe\_site}. The status is
+  \texttt{READY},
+  \texttt{MISSING\_COORDINATES} (null values) or
+  \texttt{INVALID\_COORDINATES\_OR\_DEM}.
+\item
+  \textbf{140} \texttt{ready} only if every site is
+  READY: it is all or nothing.
+\item
+  \textbf{143--159} Writes
+  \texttt{controllo\_coordinate/coordinate\_preflight.json},
+  a \texttt{.csv} and a
+  \texttt{README.md} table that puts site lat/lon next
+  to DEM-centre lat/lon and the distance between them.
+\item
+  \textbf{163--172} CLI: exit code 0 if ready, 2 otherwise.
+\end{itemize}
+
+\hypertarget{analyze_all.py-374-lines-the-batch-driver}{%
+\subsection{\texorpdfstring{\texttt{analyze\_all.py} (374 lines): the
+batch
+driver}{analyze\_all.py (374 lines): the batch driver}}\label{analyze_all.py-374-lines-the-batch-driver}}
+
+\textbf{Globals (19--31)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{24} \texttt{FAR\_REFERENCE} =
+  \texttt{dati\_regionali/LDSM\_60S\_240MPP\_ADJ.tiff}.
+  The LDSM file name only identifies the product; it is resolved to the
+  LDEM.
+\item
+  \textbf{25--31} \texttt{FAR\_DEM},
+  \texttt{FALLBACK\_DEMS},
+  \texttt{MAX\_DISTANCE},
+  \texttt{SITE\_CATALOG} and
+  \texttt{SITE\_CATALOG\_HASH} are set in
+  \texttt{main()} and read by
+  \texttt{verify()} and
+  \texttt{index()}. The ``NOT USED'' heading on 29 is
+  misleading: the catalog \emph{is} used.
+\end{itemize}
+
+\textbf{\texttt{sample\_bilinear(source, lons, lats)}
+(38--59)}: a second bilinear sampler for the regional DEM, deliberately
+\textbf{not} using scipy, so the verification doesn't share code with
+the thing it verifies.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{44--45} Same −0.5 centre convention.
+\item
+  \textbf{48} Strict \texttt{< height-1}, where
+  \texttt{DEMSampler} uses
+  \texttt{<=}. The two differ only for a sample exactly
+  on the last centre row/column.
+\item
+  \textbf{51--54} Reads one window spanning every requested sample: the
+  bounding box of the whole ray. On the 240 m mosaic that is at most
+  about 830 × 830 px for a 200 km ray, which is acceptable.
+\item
+  \textbf{55--58} Explicit 4-weight bilinear.
+\end{itemize}
+
+\textbf{\texttt{verify(dem, output, expected\_site)}
+(62--232)}: everything a reviewer would check by hand.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{66--68} Reloads the full 5 m elevation as float64.
+\item
+  \textbf{69--75} Consistency between files:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    grid shape matches \texttt{summary.json};
+  \item
+    \texttt{horizon.json} used this exact DEM;
+  \item
+    lat/lon in \texttt{horizon.json} equal the catalog
+    position to 1e-12°;
+  \item
+    \texttt{summary.site} exists, with the same lat/lon
+    and pixel;
+  \item
+    ground height agrees to 1e-6 m.
+  \end{itemize}
+
+  Line 73 is why the existing results, which have no
+  \texttt{site} key, cannot pass
+  \texttt{verify} today.
+\item
+  \textbf{78--79} Exactly 360 finite horizon values.
+\item
+  \textbf{81--84} \textbf{Independent slope}: every 4th pixel in each
+  direction (≈ 1 M points), central differences written out by hand:
+  \texttt{(z[c+1]−z[c−1])/2dx}.
+\item
+  \textbf{86--99} For each of \texttt{surf},
+  \texttt{slp}, \texttt{toterr},
+  \texttt{ldec}: one band, identical shape, transform
+  and CRS parameters; statistics; percentage missing. A CRS that is
+  numerically equal but carries a different label becomes a warning, not
+  a failure (the Site23 case).
+\item
+  \textbf{100--108} Checks that \texttt{\_slp} lies in
+  {[}0, 90{]}, then compares the recomputed slope with PGDA's own slope:
+  mean and max absolute difference go into
+  \texttt{validation.json}. This is the real external
+  check on \texttt{terrain\_derivatives}.
+\item
+  \textbf{109--115} Uncertainty and LDEC must be ≥ 0. For LDEC it
+  records the \% of zero pixels (interpolated, never measured) and warns
+  about \textbf{fractional} LDEC values: a shot count should be an
+  integer (the Haworth case).
+\item
+  \textbf{120--131} A third bilinear sampler, this one on the in-memory
+  5 m array.
+\item
+  \textbf{133--134} Rebuilds the distance array from the metadata.
+\item
+  \textbf{135--138} Ground agrees to 1e-7 m; the far DEM and the max
+  distance are the expected ones.
+\item
+  \textbf{139} Local horizon ≤ full horizon at every azimuth. Adding
+  terrain can only raise the maximum, so a violation would mean a bug.
+\item
+  \textbf{140--142} Per-azimuth source counts add up to the valid
+  samples, and the \texttt{copertura\_completa} flag is
+  consistent.
+\item
+  \textbf{147--158} \textbf{Independent horizon} at 0, 45, \ldots, 315°:
+  same geodesic rays, same fill order, independent samplers, and
+  \texttt{arctan} instead of
+  \texttt{arctan2} (equal for d \textgreater{} 0). It
+  must agree with \texttt{horizon.json} to \textless{}
+  1e-7°. This checks the \emph{implementation} (sampling, fill order,
+  indexing), not the \emph{model}: both use the same d²/2R formula.
+\item
+  \textbf{161--168} CSV row count ≤ ceil(H/20)·ceil(W/20), and equal to
+  it when the DEM has no NoData. For a 4000² DEM that is 40 000 cells.
+\item
+  \textbf{175--179} Any warning makes the status
+  \texttt{PASS\_WITH\_NOTES}; it is then saved.
+\item
+  \textbf{180--198} Builds the summary row. Notable fields:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{azimut\_ostruzione\_aumentata}: how many
+    directions far terrain raised by \textgreater{} 1e-4°;
+  \item
+    \texttt{aumento\_massimo\_orizzonte\_deg}: the
+    largest such increase;
+  \item
+    \texttt{distanza\_sito\_centro\_dem\_m}.
+  \end{itemize}
+\item
+  \textbf{199--227} The per-site \texttt{README.md}.
+\end{itemize}
+
+\textbf{\texttt{index(rows, failures)} (235--275)}:
+writes \texttt{riepilogo.json} (parameters, including
+the catalog hash, plus all rows and errors) and
+\texttt{riepilogo.csv}. If Excel has that CSV open
+(Windows file lock → \texttt{PermissionError}), it
+writes \texttt{riepilogo\_aggiornato.csv} instead
+(240--243). Lines 267--268 hard-code notes about Site23 and Haworth;
+they are not derived from the data.
+
+\textbf{\texttt{main()} (278--369)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{288--296} Preflight first.
+  \texttt{--preflight-only} just reports. If any site
+  is not READY, the run \textbf{stops before touching any output}. This
+  is what happens today.
+\item
+  \textbf{300--307} Resolves LDSM → LDEM, checks that the files exist,
+  and requires a max distance ≥ 10 km.
+\item
+  \textbf{312--319} For each site folder (sorted case-insensitively):
+  find the single \texttt{\_surf} DEM and its catalog
+  entry.
+\item
+  \textbf{320--326} \texttt{--resume}: an existing
+  result is reused only if the far DEM, max distance, fallbacks,
+  coordinate origin, catalog hash and lat/lon (to 1e-12) all match. Any
+  change in the catalog forces a recompute.
+\item
+  \textbf{327--334} Otherwise it runs
+  \texttt{script.py --mode all --no-rasters …} as a
+  \textbf{separate process}. Each site's 16 Mpx arrays are freed when
+  the process exits, which matters on a laptop processing 27 sites.
+  stdout and stderr go to \texttt{run.log}; a non-zero
+  exit becomes an error.
+\item
+  \textbf{335--341} Stamps the catalog hash into
+  \texttt{horizon.json} and writes
+  \texttt{horizon\_local.json} (the near-only profile
+  as its own file).
+\item
+  \textbf{342--347} \texttt{verify}; any exception is
+  recorded per site with the full traceback in
+  \texttt{error.log}, and the loop continues with the
+  next site.
+\item
+  \textbf{348} \texttt{index()} after \textbf{every}
+  site, so a crash at site 20 still leaves a valid summary of the first
+  19.
+\item
+  \textbf{349--367} Two comparison charts:
+  \texttt{confronto.png} (mean slope, \% ≤ 10°) and
+  \texttt{confronto\_orizzonti.png} (far-terrain
+  contribution).
+\end{itemize}
+
+\hypertarget{finalize_results.py-88-lines}{%
+\subsection{\texorpdfstring{\texttt{finalize\_results.py} (88
+lines)}{finalize\_results.py (88 lines)}}\label{finalize_results.py-88-lines}}
+
+A last audit of the entire output tree, run after the batch.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{16--17} Refuses to run if
+  \texttt{riepilogo.json} has no catalog hash, which
+  means results made from DEM centres. These are never ``finalised''.
+\item
+  \textbf{18--20} No errors, and the set of result sites equals the set
+  of input folders.
+\item
+  \textbf{24--36} \texttt{normalize} renames the legacy
+  source label \texttt{mosaico87S} to
+  \texttt{lontano} inside
+  \texttt{horizon.json} and
+  \texttt{validation.json}. It is a leftover from an
+  earlier run that used the 87S mosaic (whose
+  \texttt{download.json} is still in
+  \texttt{dati\_regionali}).
+\item
+  \textbf{30--31} All 8 files exist and are non-empty for every site.
+\item
+  \textbf{39--51} Re-asserts the contract:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    PASS status;
+  \item
+    explicit coordinates with a matching catalog hash;
+  \item
+    lat/lon equal the validated position;
+  \item
+    360 finite values, with full ≥ local horizon;
+  \item
+    complete coverage to exactly 200 km;
+  \item
+    far DEM is \texttt{LDEM\_60S\_240MPP\_ADJ.TIF};
+  \item
+    no LDSM file was ever used as a height source, and the LDSM→LDEM
+    mapping was recorded;
+  \item
+    no \texttt{error.log}.
+  \end{itemize}
+\item
+  \textbf{55--61} Restores the batch globals from the report and
+  rewrites the index. \textbf{62--67} then rewrites every
+  \texttt{riepilogo*.csv} with the same rows; this
+  duplicates what \texttt{index()} just did.
+\item
+  \textbf{69--75} Redraws
+  \texttt{confronto\_orizzonti.png}.
+\item
+  \textbf{76--83} \texttt{verifica\_finale.json}: site
+  count, total cells, 360 × sites directions, the largest
+  independent-check error, and every site that has notes.
+\end{itemize}
+
+\hypertarget{issues-found-in-the-topography-code}{%
+\section{Issues found in the topography
+code}\label{issues-found-in-the-topography-code}}
+
+Ranked by how much they affect the results. Overall, the code is
+careful: frames, NoData, half-pixel offsets, LDSM/LDEM and coverage are
+all handled explicitly and cross-checked. The weak point is not the
+maths but the \textbf{state of the inputs}.
+
+\hypertarget{blocking}{%
+\subsection{Blocking}\label{blocking}}
+
+\textbf{1. Every site coordinate in the catalog is
+\texttt{null}, so the current results are horizons from
+the DEM tile centre.}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{config/site\_coordinates.json} is the
+  untouched template: \texttt{lat},
+  \texttt{lon} and \texttt{source} are
+  \texttt{null} for all 27 sites.
+\item
+  The results in \texttt{risultati topografia/} were
+  produced by an earlier version that used the DEM centre
+  (\texttt{AVVERTENZA\_COORDINATE.md} says so). The NPA
+  \texttt{summary.json} has no
+  \texttt{site} key.
+\item
+  With the current code, \texttt{analyze\_all.py} stops
+  at preflight, \texttt{verify()} would fail on line
+  73, and \texttt{finalize\_results.py} refuses to run.
+\item
+  In practice: the horizon profiles the ephemeris engine reads are for
+  the tile centre, which is not necessarily the chosen landing point. At
+  −87° the Sun stays within about ±1.5° of the horizon and NPA's horizon
+  reaches 4.7°, so moving the observer a few km can flip illumination
+  for hours.
+\item
+  \textbf{Fix:} fill the catalog with the agreed points and a source
+  (for example the Artemis III candidate-region coordinates the team
+  used), then run \texttt{analyze\_all.py} and
+  \texttt{finalize\_results.py}.
+\end{itemize}
+
+\hypertarget{affects-interpretation}{%
+\subsection{Affects interpretation}\label{affects-interpretation}}
+
+\textbf{2. Aspect is relative to grid north, not geographic north.}
+
+\begin{itemize}
+\tightlist
+\item
+  In polar stereographic, grid north at a point is rotated from true
+  north by the point's longitude offset from the projection's central
+  meridian. At NPA (lon ≈ −71.6°) that is a rotation of tens of degrees.
+\item
+  The code documents it in the docstring, the band name and the
+  limitations list. But anyone using \texttt{aspect} to
+  mean ``this slope faces the Sun or Earth'' gets a wrong direction.
+\item
+  \textbf{Fix:} add the meridian convergence to the aspect (computable
+  per pixel from \texttt{pyproj}
+  \texttt{Proj.get\_factors().meridian\_convergence}),
+  or simply don't publish aspect.
+\end{itemize}
+
+\textbf{3. Horizon azimuth sampling is 1°.}
+
+\begin{itemize}
+\tightlist
+\item
+  At 200 km one degree is a 3.5 km arc, and at 50 km it is 0.9 km. A
+  narrow peak that falls between two rays is missed.
+\item
+  When the ephemeris code interpolates between azimuths, it effectively
+  assumes the silhouette is smooth.
+\item
+  For sunrise and sunset timing at the pole this is probably the largest
+  geometric error left. Consider 0.25--0.5°, at a 2--4× runtime cost.
+\end{itemize}
+
+\textbf{4. Cell \texttt{passes\_slope\_filter\_pct}
+counts missing slope as ``fail''} (\texttt{script.py}
+139), while the DEM-wide \texttt{pct\_of\_valid\_slope}
+excludes it.
+
+\begin{itemize}
+\tightlist
+\item
+  Border cells therefore look worse than they are.
+\item
+  It is conservative and commented, but the two percentages are not
+  directly comparable.
+\end{itemize}
+
+\textbf{5. \texttt{relief\_m} is max − min.}
+
+\begin{itemize}
+\tightlist
+\item
+  On a uniformly tilted 100 m cell at 10°, relief is about 18 m with
+  zero roughness.
+\item
+  For hazard ranking, detrended RMS (residual after fitting a plane)
+  separates roughness from tilt.
+\end{itemize}
+
+\hypertarget{minor-or-cosmetic}{%
+\subsection{Minor or cosmetic}\label{minor-or-cosmetic}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{6. Projected areas.} Polar stereographic with true scale at
+  the pole has k = 2/(1+sin\textbar φ\textbar) ≈ 1.0007 at 87°. Areas
+  are overestimated by about 0.14 \% and slopes underestimated by about
+  0.07 \%. Negligible, and the code says so.
+\item
+  \textbf{7. Radius check inconsistency.}
+  \texttt{script.py} 75 tests
+  \texttt{crs.to\_dict().get("R") != 1737400} (exact
+  match on a proj4 key). The other modules use
+  \texttt{np.isclose} on the ellipsoid. A valid lunar
+  CRS written as WKT without an \texttt{R} key would be
+  rejected only by \texttt{script.py}.
+\item
+  \textbf{8. Redundant checks and stale text.}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{horizon.py} 111--112 repeats the check of
+    102--103.
+  \item
+    The ``NOT USED'' comment at
+    \texttt{analyze\_all.py} 29 is wrong.
+  \item
+    \texttt{index()} hard-codes notes about Site23 and
+    Haworth, and parameter values (step 5 m, 10 km, 10°) that are not
+    read from the run.
+  \item
+    \texttt{finalize\_results.py} rewrites the CSVs
+    right after \texttt{index()} has written them.
+  \end{itemize}
+\item
+  \textbf{9. The ``independent'' horizon check verifies the
+  implementation, not the model.} It reuses the same distances, the same
+  geodesic and the same d²/2R formula. A wrong model (say, a sign error
+  in the curvature term) would pass. A one-off test against an exact
+  spherical formula would close this gap. My own estimate of the
+  approximation error is about 0.004° at 200 km, so the model itself is
+  fine.
+\item
+  \textbf{10. The 5 m step along rays samples, it does not search.} A
+  sub-5 m spike between samples is missed. The code states this
+  (\texttt{limite\_risoluzione}), and at 5 m/px the DEM
+  has no such detail anyway.
+\item
+  \textbf{11. \texttt{download\_dem.py}:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    it stores \texttt{Last-Modified} but never compares
+    it on resume, so a file that changed on the server mid-download
+    would produce a mixed file;
+  \item
+    the SHA-256 is recorded but not checked against a published value;
+  \item
+    if the checkpoint is deleted after preallocation, the full-size
+    \texttt{.part} is taken as complete (line 26).
+  \end{itemize}
+\item
+  \textbf{12. LDEC = 0 is interpolated terrain, not NoData.} It is
+  handled correctly, but the \% of LDEC-zero pixels should be shown next
+  to any per-cell result. A smooth-looking cell may simply be
+  unmeasured.
+\end{itemize}
+
+\hypertarget{verified-correct-things-that-often-go-wrong-and-dont-here}{%
+\subsection{Verified correct (things that often go wrong and don't
+here)}\label{verified-correct-things-that-often-go-wrong-and-dont-here}}
+
+\begin{itemize}
+\tightlist
+\item
+  Half-pixel offset between the rasterio and scipy conventions
+  (\texttt{horizon.py} 49, mirrored in all three
+  samplers).
+\item
+  \texttt{np.gradient} axis order and the south→north
+  sign flip.
+\item
+  Lunar sphere everywhere; never EPSG:4326.
+\item
+  Geographic azimuth through \texttt{Geod.fwd}, not
+  grid bearings.
+\item
+  Far DEM only fills gaps; it never overwrites 5 m data. Missing terrain
+  stays NaN, never 0.
+\item
+  LDSM is never used as heights; the mapping is logged and asserted.
+\item
+  Strict JSON (\texttt{allow\_nan=False}), per-site
+  subprocess isolation, \texttt{index()} after every
+  site, and resume keyed to the catalog hash.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,31 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Overview}{3}{section.1}%
+\contentsline {section}{\numberline {2}How the pipeline runs: step by step}{4}{section.2}%
+\contentsline {section}{\numberline {3}The point engine: \texttt {effemeridi.py} (429 lines)}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Module setup (38--59)}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}\texttt {\_risorse()} (62--73)}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Helpers (76--151)}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Positions: \texttt {calcola\_posizioni} and \texttt {\_calcola\_completo} (154--185)}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}\texttt {valuta\_sito(...)} (188--337) --- the main function}{7}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}\texttt {\_rischio\_polvere(m)} (340--357)}{8}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}\texttt {grafico}, \texttt {\_stampa} and the self-test (360--429)}{8}{subsection.3.7}%
+\contentsline {section}{\numberline {4}The area engine: \texttt {mappatura.py} (539 lines)}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Constants (51--55)}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}\texttt {class\ DEM} (61--116)}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}\texttt {orizzonte\_celle(...)} (122--163) --- a horizon for every cell}{9}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Sun and Earth for all cells (169--212)}{10}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Static metrics: \texttt {metriche\_celle} (230--261)}{11}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Dynamic evolution: \texttt {evoluzione\_celle} (264--280) and \texttt {\_bit\_b64} (283--284)}{11}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}\texttt {mappa\_sito(...)} (290--379) --- the driver for one site}{11}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}\texttt {\_migliori\_celle} (382--402)}{12}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Saving and plotting (405--480)}{12}{subsection.4.9}%
+\contentsline {subsection}{\numberline {4.10}\texttt {confronta\_con\_terreno} (483--497)}{12}{subsection.4.10}%
+\contentsline {subsection}{\numberline {4.11}Command line (500--539)}{12}{subsection.4.11}%
+\contentsline {section}{\numberline {5}Web-app support: \texttt {tabella\_sole\_terra.py} and \texttt {tabella\_sole\_terra.js}}{12}{section.5}%
+\contentsline {subsection}{\numberline {5.1}\texttt {tabella\_sole\_terra.py} (67 lines)}{12}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}\texttt {tabella\_sole\_terra.js} (69 lines)}{12}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Validation: \texttt {test\_luna.py} (39 lines)}{13}{section.6}%
+\contentsline {section}{\numberline {7}Issues found in the ephemerides code}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Affects results}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Minor or cosmetic}{14}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Verified correct}{14}{subsection.7.3}%
